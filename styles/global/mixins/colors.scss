@@ -1,0 +1,27 @@
+@mixin static-colors {
+  --color-primary: #1de9b6;
+  --color-secondary: #40c4ff;
+  --color-light: #f0f0f3;
+  --color-dark: #1c1c24;
+  --color-light-paper: #ffffffcc;
+  --color-dark-paper: #2c2f32cc;
+  --color-selection-background: var(--color-primary);
+}
+
+@mixin light-theme-colors {
+  --color-text: rgba(0, 0, 0, 0.87);
+  --color-background: var(--color-light);
+  --color-background-paper: var(--color-light-paper);
+  --color-border: #d4d4d4;
+  --color-placeholder: #c9c9c9;
+  --box-shadow: 0px 0px 15px 0 #00000018;
+}
+
+@mixin dark-theme-colors {
+  --color-text: #fff;
+  --color-background: var(--color-dark);
+  --color-background-paper: var(--color-dark-paper);
+  --color-border: #999999;
+  --color-placeholder: #c9c9c9;
+  --box-shadow: 0px 0px 15px 0 #ffffff57;
+}

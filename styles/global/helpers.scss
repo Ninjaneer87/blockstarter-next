@@ -1,0 +1,61 @@
+.cyan {
+  color: var(--color-primary);
+}
+
+.grey {
+  color: grey;
+}
+
+.white {
+  color: #fff;
+}
+
+.link {
+  transition: color 250ms ease-in-out;
+}
+
+.link:hover {
+  color: var(--color-primary);
+}
+
+.invis {
+  opacity: 0;
+}
+
+// gradients
+.gradient-wrapper {
+  position: relative;
+  width: fit-content;
+  border-radius: 1rem;
+  padding: 1px;
+  background: linear-gradient(
+    160deg,
+    var(--color-primary) 0%,
+    transparent 25%,
+    transparent 60%,
+    var(--color-secondary) 100%
+  );
+
+  &::before,
+  &::after{
+    content: '';
+    position: absolute;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    filter: blur(200px);
+    z-index: -1;
+    pointer-events: none;
+    opacity: .5;
+  }
+  &::before {
+    top: 0%;
+    left: 0%;
+    background: var(--color-primary);
+  }
+  &::after {
+    bottom: 0%;
+    right: 0%;
+    background: var(--color-secondary);
+  }
+}

@@ -1,0 +1,62 @@
+.toggle {
+  padding: 1em;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  &--black {
+    .hamburger,
+    .hamburger::before,
+    .hamburger::after {
+      background: var(--color-dark);
+    }
+  }
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  display: block;
+  background: var(--color-secondary);
+  height: 2px;
+  width: 1.75em;
+  border-radius: 3px;
+  transition: transform ease-in-out 200ms, background ease-in-out 150ms,
+    opacity ease-in-out 200ms;
+}
+
+.hamburger {
+  &::before {
+    transform: translateY(-6px) translateX(-6px);
+  }
+
+  &::after {
+    transform: translateY(4px) translateX(-8px);
+  }
+
+  &--expanded {
+    transform: rotate(45deg);
+    background: var(--color-primary);
+
+    &::before {
+      opacity: 0;
+      background: var(--color-primary);
+    }
+
+    &::after {
+      transform: translateY(-3px) rotate(-90deg);
+      background: var(--color-primary);
+    }
+  }
+}
+
+.hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

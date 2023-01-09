@@ -1,0 +1,36 @@
+@use "/styles/global/_index.scss" as *;
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  body {
+    @include static-colors;
+    @include light-theme-colors;
+  }
+  body.dark {
+    @include dark-theme-colors;
+  }
+}
+
+@layer components {
+  .bg-glass {
+    @apply backdrop-blur-lg bg-themed-bg-paper;
+  }
+  .icon-wrapper {
+    @apply p-2 rounded-2xl flex items-center justify-center transition-all min-h-[51px] min-w-[51px];
+  }
+  .heading {
+    @apply flex justify-center items-center bg-glass rounded-md p-4 md:px-12 text-2xl w-fit mx-auto;
+  }
+  .gradient {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
+  .gradient-button {
+    @apply gradient border-none outline-none flex gap-2 items-center justify-center py-3 px-4 rounded-xl text-base text-white;
+  }
+  .wallet-card {
+    @apply flex justify-between items-center border-[1px] border-themed-border border-solid rounded-md p-3 text-base;
+  }
+}
