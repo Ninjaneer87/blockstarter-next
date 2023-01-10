@@ -33,4 +33,7 @@
   .wallet-card {
     @apply flex justify-between items-center border-[1px] border-themed-border border-solid rounded-md p-3 text-base;
   }
+  .linear-loader {
+    @apply fixed top-0 left-0 right-0 z-[1000];
+  }
 }

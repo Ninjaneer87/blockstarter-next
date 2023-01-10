@@ -9,7 +9,7 @@ import {
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import InfoIcon from '@mui/icons-material/Info';
 import CloseIcon from '@mui/icons-material/Close';
-import { useWeb3Context } from "context/web3Context";
+import { useCoinbaseWallet, useMetamask, useWalletConnect } from "@thirdweb-dev/react";
 
 const metamaskImg = '../../img/metamask.svg';
 const coinbaseImg = '../../img/coinbase.svg';
@@ -21,7 +21,9 @@ type Props = {
 }
 
 const WalletModal = ({ isOpen, handleClose }: Props) => {
-  const { coinbase, metamask, walletConnect } = useWeb3Context();
+  const metamask = useMetamask();
+  const coinbase = useCoinbaseWallet();
+  const walletConnect = useWalletConnect();
 
   const handleMetamask = () => {
     metamask();

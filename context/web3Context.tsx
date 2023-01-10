@@ -2,22 +2,17 @@ import React, { useContext, createContext } from "react";
 import { useAddress, useContract, useMetamask, useContractWrite, useCoinbaseWallet, useWalletConnect, useNetwork } from '@thirdweb-dev/react';
 import { ethers } from "ethers";
 import { SmartContract } from "@thirdweb-dev/sdk";
-import { CampaignResponse } from "@/types/campaign-response.type";
-import { Campaign } from "@/types/campaign.type";
-import { Donation } from "@/types/donation.type";
-import { CreateCampaignForm } from "@/types/CreateCampaignForm";
-import useWalletBalance, { Balance } from "hooks/useWalletBalance";
+import { CampaignResponse } from "@/types/campaign-response";
+import { Campaign } from "@/types/campaign";
+import { Donation } from "@/types/donation";
+import { CampaignBody } from "@/types/campaign-body";
+import useWalletBalance, { Balance } from "hooks/web3/useWalletBalance";
 import { useEffect } from "react";
 
 type Web3ContextType = {
   address: string | undefined;
   contract: SmartContract<ethers.BaseContract> | undefined;
-  balance: Balance | undefined;
-  metamask: ReturnType<typeof useMetamask>;
-  coinbase: ReturnType<typeof useCoinbaseWallet>;
-  walletConnect: ReturnType<typeof useWalletConnect>;
-  network: ReturnType<typeof useNetwork>[0]['data']['chain'];
-  createCampaign: (form: CreateCampaignForm) => Promise<void>;
+  createCampaign: (form: CampaignBody) => Promise<void>;
   getCampaigns: () => Promise<Campaign[]>;
   getUserCampaigns: () => Promise<Campaign[]>;
   donate: (pId: number, amount: string) => Promise<any>;
@@ -34,18 +29,13 @@ export const Web3ContextProvider = ({ children }: Props) => {
   const { contract } = useContract(process.env.CONTRACT_ADDRESS);
   const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
   const address = useAddress();
-  const metamask = useMetamask();
-  const coinbase = useCoinbaseWallet();
-  const walletConnect = useWalletConnect();
-  const balance = useWalletBalance(address);
-  const network = useNetwork();
 
-  const publishCampaign = async (form: CreateCampaignForm) => {
+  const publishCampaign = async (form: CampaignBody) => {
     try {
       const data = await createCampaign([
         address,
         form.title,
-        form.description,
+        form.story,
         form.target,
         new Date(form.deadline).getTime(),
         form.image,
@@ -107,11 +97,6 @@ export const Web3ContextProvider = ({ children }: Props) => {
   const context: Web3ContextType = {
     address,
     contract,
-    balance,
-    metamask,
-    coinbase,
-    walletConnect,
-    network: network[0]?.data?.chain,
     createCampaign: publishCampaign,
     getCampaigns,
     getUserCampaigns,

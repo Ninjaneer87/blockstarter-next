@@ -1,19 +1,23 @@
 import { ButtonBase } from '@mui/material';
+import { useNavContext } from 'context/navContext';
 import React from 'react';
 import { FormEventHandler } from 'react';
 
 const search = '../../img/search.svg';
 
 const Search = () => {
+  const { setExpanded } = useNavContext();
+
   const handleSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    setExpanded(false);
     console.log('Search Submitted');
   }
 
   return (
     <form 
       onSubmit={handleSearch}
-      className="hidden lg:flex flex-1 flex-row max-w-[450px] py-2 pl-4 pr-2 h-[51px] bg-glass rounded-full"
+      className="flex w-full max-lg:shadow-themed-shadow py-2 pl-4 pr-2 h-[51px] bg-glass rounded-full mx-auto shrink-0"
     >
       <input
         type="text"

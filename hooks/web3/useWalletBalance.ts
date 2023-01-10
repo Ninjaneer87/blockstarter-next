@@ -1,4 +1,4 @@
-import { useSDK } from "@thirdweb-dev/react";
+import { useAddress, useSDK } from "@thirdweb-dev/react";
 import { BigNumber } from "ethers";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -11,15 +11,18 @@ export type Balance = {
   displayValue: string;
 }
 
-export default function useWalletBalance(address?: string) {
+export default function useWalletBalance() {
   const [balance, setBalance] = useState<Balance>();
   const sdk = useSDK();
+  const address = useAddress();
 
   useEffect(() => {
-    (async () => {
-      const balance = await sdk?.wallet.balance();
-      if (balance) setBalance(balance);
-    })();
+    if(address) {
+      (async () => {
+        const balance = await sdk?.wallet.balance();
+        if (balance) setBalance(balance);
+      })();
+    }
   }, [address]);
 
   return balance;

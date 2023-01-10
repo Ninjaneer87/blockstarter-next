@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 import Head from "next/head";
@@ -9,6 +9,7 @@ import {
   CssBaseline,
   createTheme,
   responsiveFontSizes,
+  LinearProgress,
 } from "@mui/material";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "utils/createEmotionCache";
@@ -20,6 +21,9 @@ import ThemeContext from "context/themeContext";
 import { NavContextProvider } from "context/navContext";
 import Layout from "@/components/layout/Layout";
 import { Web3ContextProvider } from "context/web3Context";
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from "react-query/devtools";
+import { useRouteLoading } from "hooks/useRouteLoading";
 
 const clientSideEmotionCache = createEmotionCache();
 const darkTheme = responsiveFontSizes(createTheme(darkThemeOptions));
@@ -34,9 +38,11 @@ type MyAppProps = AppProps & {
 
 const MyApp: React.FC<MyAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const [queryClient] = useState(() => new QueryClient())
   const [dark, toggleDarkMode] = useDarkMode(null);
   const [mounted] = useMounted();
   const theme = dark ? darkTheme : lightTheme;
+  const isRouteLoading = useRouteLoading();
 
   useEffect(() => {
     if (mounted) document.body.style.visibility = "visible";
@@ -52,22 +58,30 @@ const MyApp: React.FC<MyAppProps> = (props) => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeContext.Provider value={{ dark, toggleDarkMode }}>
-        <NavContextProvider>
-          <CacheProvider value={emotionCache}>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <ThirdwebProvider desiredChainId={activeChainId}>
-                <Web3ContextProvider>
-                  <Layout>
-                    <Component {...pageProps} />
-                  </Layout>
-                </Web3ContextProvider>
-              </ThirdwebProvider>
-            </ThemeProvider>
-          </CacheProvider>
-        </NavContextProvider>
-      </ThemeContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ThemeContext.Provider value={{ dark, toggleDarkMode }}>
+            <NavContextProvider>
+              <CacheProvider value={emotionCache}>
+                <ThemeProvider theme={theme}>
+                  <CssBaseline />
+                  <ThirdwebProvider desiredChainId={activeChainId}>
+                    <Web3ContextProvider>
+                      {isRouteLoading ? (
+                        <LinearProgress className="linear-loader" />
+                      ) : null}
+                      <Layout>
+                        <Component {...pageProps} />
+                        <ReactQueryDevtools initialIsOpen={false} />
+                      </Layout>
+                    </Web3ContextProvider>
+                  </ThirdwebProvider>
+                </ThemeProvider>
+              </CacheProvider>
+            </NavContextProvider>
+          </ThemeContext.Provider>
+        </Hydrate>
+      </QueryClientProvider>
     </React.Fragment>
   );
 }

@@ -9,15 +9,15 @@ import NightsStayIcon from '@mui/icons-material/NightsStay';
 import ClientOnlyPortal from '../portals/ClientOnlyPortal';
 import { useThemeContext } from 'context/themeContext';
 import { useNavContext } from 'context/navContext';
-import AuthInfo from './header/AuthInfo';
-import { useWeb3Context } from 'context/web3Context';
-import { useDisconnect } from '@thirdweb-dev/react';
+import AuthInfo from '../shared/AuthInfo';
+import { useAddress, useDisconnect } from '@thirdweb-dev/react';
+import Search from './header/Search';
 
 const SideNav = () => {
   const { expanded, mounted, setExpanded } = useNavContext();
   const { asPath: currentUrl } = useRouter();
   const { dark, toggleDarkMode } = useThemeContext();
-  const { address } = useWeb3Context();
+  const address = useAddress();
   const disconnect = useDisconnect();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down(1024));
@@ -42,6 +42,9 @@ const SideNav = () => {
               ${isCollapsed ? 'blur-out' : ''}
             `}
           >
+            {isSmallScreen 
+              ? <Search /> 
+              : null}
             <ul className='flex flex-col gap-3 lg:gap-7'>
               {navItems.map(item => (
                 <Tooltip title={`${isSmallScreen ? "" : item.label}`} key={item.path} arrow placement='right'>

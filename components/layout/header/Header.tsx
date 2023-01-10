@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../../shared/Logo';
 import Search from './Search';
-import AuthInfo from './AuthInfo';
+import AuthInfo from '../../shared/AuthInfo';
 import { useMediaQuery, useTheme } from '@mui/material';
 import HamburgerButton from '@/components/shared/HamburgerButton';
 import { useNavContext } from 'context/navContext';
@@ -15,8 +15,11 @@ const Header = () => {
     <header className='fixed top-0 left-0 right-0 bg-gradient-to-b from-themed-bg via-themed-bg to-transparent px-3 sm:px-6 z-10'>
       <div className='flex items-center py-6 gap-1 sm:gap-4'>
         <Logo withLabel />
+
         <div className="ml-auto"></div>
-        <Search />
+        <div className="hidden lg:flex flex-1 max-w-[450px] ">
+          <Search />
+        </div>
         {isSmallScreen 
           ? <HamburgerButton
               className='icon-wrapper bg-themed-bg-paper'
