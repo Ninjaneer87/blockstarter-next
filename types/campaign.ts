@@ -1,10 +1,11 @@
 export type Campaign = {
+  pId: number;
   owner: string;
   title: string;
   description: string;
   target: string;
   deadline: number;
-  amountCollected: string;
+  ownerBalance: string;
   sumOfAllDonations: string;
   image: string;
   donators?: string[];

@@ -10,17 +10,19 @@ export const useAddCampaign = (
   >
 ) => {
   const { contract } = useContract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
-  const { mutateAsync: createCampaign } = useContractWrite(contract, "createProject");
+  const { mutateAsync } = useContractWrite(contract, "createProject");
   const address = useAddress();
 
-  return useMutation((campaignForm: CampaignBody) => {
-    return createCampaign([
+  const addCampaign = (campaignForm: CampaignBody) => {
+    return mutateAsync([
       address,
       campaignForm.title,
       campaignForm.story,
       campaignForm.target,
-      Math.round(new Date(campaignForm.deadline).getTime() / 1000), // in seconds
+      Math.round(new Date(campaignForm.deadline).getTime() / 1000), // block timestamps are in seconds
       campaignForm.image,
     ]);
-  }, options || {});
+  };
+
+  return useMutation(addCampaign, options);
 };

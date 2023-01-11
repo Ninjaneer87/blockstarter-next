@@ -1,13 +1,14 @@
 import { FormControl, Input, InputAdornment, InputLabel } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
-import React from 'react';
+import React, { HTMLInputTypeAttribute } from 'react';
+import { floatInputHandler, floatPasteHandler } from 'utils/utility';
 
 export type FormFieldProps<T> = {
   icon: JSX.Element;
   name: T;
   label: string;
   placeholder?: string;
-  type?: string;
+  type?: HTMLInputTypeAttribute ;
   multiline?: boolean;
   props?: any;
   error: boolean;
@@ -19,9 +20,11 @@ function FormField<T extends string>({ icon, name, label, placeholder, type, mul
         {label}
       </InputLabel>
       <InputBase
-        autoComplete="false"
+        autoComplete="off"
+        autoCorrect="off"
         spellCheck="false"
         multiline={multiline}
+        type="text"
         id={name}
         name={name}
         startAdornment={
@@ -30,7 +33,15 @@ function FormField<T extends string>({ icon, name, label, placeholder, type, mul
           </InputAdornment>
         }
         {...(placeholder && { placeholder })}
-        {...(type && { type })}
+        {...(type === 'number' && {
+          inputProps: {
+            minLength: 3,
+            maxLength: 80,
+            onInput: floatInputHandler,
+            onPaste: floatPasteHandler
+          },
+          inputMode: 'decimal'
+        })}
         {...(props && props)}
         className={`
           relative transition-all pt-5 border-0 border-b-[1px] border-transparent border-solid

@@ -5,7 +5,7 @@ import NumbersIcon from '@mui/icons-material/Numbers';
 import { formatAddress } from 'utils/utility';
 import ConnectButton from '@/components/shared/ConnectButton';
 import { useAddress, useNetwork } from '@thirdweb-dev/react';
-import useWalletBalance from 'hooks/web3/useWalletBalance';
+import useWalletBalance from 'hooks/useWalletBalance';
 
 const AuthInfo = () => {
   const address = useAddress();

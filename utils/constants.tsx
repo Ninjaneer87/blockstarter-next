@@ -15,7 +15,7 @@ export const navItems = [
   {
     label: 'all campaigns',
     icon: <WindowIcon fontSize="large" />,
-    path: '/',
+    path: '/campaigns',
     exact: true,
   },
   {

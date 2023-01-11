@@ -6,7 +6,6 @@ const Home: NextPage = () => {
   return (
     <>
       <h1>BlockStarter Home</h1>
-      <CampaignCard />
     </>
   );
 };

@@ -20,7 +20,6 @@ import { useMounted } from "hooks/useMounted";
 import ThemeContext from "context/themeContext";
 import { NavContextProvider } from "context/navContext";
 import Layout from "@/components/layout/Layout";
-import { Web3ContextProvider } from "context/web3Context";
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useRouteLoading } from "hooks/useRouteLoading";
@@ -66,15 +65,11 @@ const MyApp: React.FC<MyAppProps> = (props) => {
                 <ThemeProvider theme={theme}>
                   <CssBaseline />
                   <ThirdwebProvider desiredChainId={activeChainId}>
-                    <Web3ContextProvider>
-                      {isRouteLoading ? (
-                        <LinearProgress className="linear-loader" />
-                      ) : null}
-                      <Layout>
-                        <Component {...pageProps} />
-                        <ReactQueryDevtools initialIsOpen={false} />
-                      </Layout>
-                    </Web3ContextProvider>
+                    {isRouteLoading ? <LinearProgress className="linear-loader" /> : null}
+                    <Layout>
+                      <Component {...pageProps} />
+                      <ReactQueryDevtools initialIsOpen={false} />
+                    </Layout>
                   </ThirdwebProvider>
                 </ThemeProvider>
               </CacheProvider>

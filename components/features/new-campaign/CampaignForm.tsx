@@ -12,6 +12,8 @@ import { campaignFormItems } from 'utils/constants';
 import ConnectButton from '@/components/shared/ConnectButton';
 import { useAddress } from '@thirdweb-dev/react';
 import { useAddCampaign } from 'hooks/web3/useAddCampaign';
+import { checkIfImage } from 'utils/utility';
+import { ethers } from 'ethers';
 
 export type CampaignFieldName = "fullname" | "title" | "story" | "target" | "deadline" | "image";
 
@@ -37,7 +39,16 @@ const CampaignForm = () => {
   const zorm = useZorm("campaign", FormSchema, {
     async onValidSubmit(event) {
       event.preventDefault();
-      addCampaign(event.data);
+      const form = {
+        ...event.data,
+        target: ethers.utils.parseUnits(event.data.target, 18)
+      };
+      checkIfImage(form.image, (exists) => {
+        if(!exists) {
+          console.log('Provide valid image URL');
+        }
+        addCampaign(form);
+      })
     },
   });
 
@@ -62,7 +73,7 @@ const CampaignForm = () => {
                     label="Set campaign deadline"
                     value={date}
                     onChange={handleDate}
-                    inputFormat="DD/MM/YYYY"
+                    inputFormat="MM/DD/YYYY"
                     minDate={dayjs(new Date())}
                     renderInput={({ InputProps, ...otherProps }) => (
                       <FormField
