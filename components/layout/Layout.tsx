@@ -8,11 +8,11 @@ import { useIsFetching } from "react-query";
 
 const Layout = ({ children }: PropsWithChildren) => {
   const isRouteLoading = useRouteLoading();
-  const isFetching = useIsFetching() > 0;
+  const isQueryLoading = useIsFetching({ predicate: query => query.state.status === 'loading' }) > 0;
 
   return (
     <>
-      {isFetching ? <LinearProgress className="linear-loader" /> : null}
+      {isRouteLoading || isQueryLoading ? <LinearProgress className="linear-loader" /> : null}
       <Header />
       <SideNav />
       <main className="lg:pl-[120px] py-[100px]">

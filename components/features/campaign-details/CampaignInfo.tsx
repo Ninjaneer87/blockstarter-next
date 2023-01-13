@@ -16,9 +16,9 @@ const CampaignInfo = ({ owner, story, donators, donations} : Props) => {
       <StarterCard owner={owner} />
       
       <h3 className='uppercase mb-2'>Story</h3>
-      <div className='text-sm dark:opacity-70 '>{story}</div>
+      <div className='text-sm dark:opacity-70 whitespace-pre-wrap'>{story}</div>
       
-      <h3 className='uppercase mb-2'>Donations</h3>
+      <h3 className='uppercase mb-2'>Top donators</h3>
       {donators.length 
         ? <DonationsList donators={donators} donations={donations} />
         : <div className='text-sm dark:opacity-70 '>No donations yet. Be the first to donate</div> }
@@ -26,4 +26,4 @@ const CampaignInfo = ({ owner, story, donators, donations} : Props) => {
   );
 };
 
-export default CampaignInfo;
+export default React.memo(CampaignInfo);

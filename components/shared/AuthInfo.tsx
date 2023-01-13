@@ -5,11 +5,11 @@ import NumbersIcon from '@mui/icons-material/Numbers';
 import { formatAddress } from 'utils/utility';
 import ConnectButton from '@/components/shared/ConnectButton';
 import { useAddress, useNetwork } from '@thirdweb-dev/react';
-import useWalletBalance from 'hooks/useWalletBalance';
+import useWalletBalance from 'hooks/web3/useWalletBalance';
 
 const AuthInfo = () => {
   const address = useAddress();
-  const balance = useWalletBalance();
+  const { data: balance } = useWalletBalance();
   const network = useNetwork();
   const chainInfo = network[0]?.data?.chain;
 
@@ -39,4 +39,4 @@ const AuthInfo = () => {
   );
 };
 
-export default AuthInfo;
+export default React.memo(AuthInfo);

@@ -18,4 +18,4 @@ const ConnectWallet = () => {
   );
 };
 
-export default ConnectWallet;
+export default React.memo(ConnectWallet);

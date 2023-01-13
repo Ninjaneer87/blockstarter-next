@@ -21,7 +21,7 @@ const DonationStats = ({ daysLeft, amountRaised, target, backersCount = 0 }: Pro
           <div className='text-2xl font-bold p-4 bg-themed-bg-paper grow flex justify-center items-center'>
             <span className='truncate max-w-[250px]'>{value}</span>
           </div>
-          <div className='opacity-80 p-4 bg-primary mt-auto flex justify-center items-center'>
+          <div className='opacity-90 p-4 bg-primary mt-auto flex justify-center items-center'>
             <span className='truncate max-w-[250px]'>{label}</span>
           </div>
         </li>
@@ -30,4 +30,4 @@ const DonationStats = ({ daysLeft, amountRaised, target, backersCount = 0 }: Pro
   );
 };
 
-export default DonationStats;
+export default React.memo(DonationStats);

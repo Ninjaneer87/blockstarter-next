@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -80,4 +81,4 @@ const WalletModal = ({ isOpen, handleClose }: Props) => {
   );
 };
 
-export default WalletModal;
+export default React.memo(WalletModal);

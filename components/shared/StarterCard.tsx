@@ -15,4 +15,4 @@ const StarterCard = ({ owner }: Props) => {
   );
 };
 
-export default StarterCard;
+export default React.memo(StarterCard);

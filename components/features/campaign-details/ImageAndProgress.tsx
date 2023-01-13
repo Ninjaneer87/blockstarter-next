@@ -19,4 +19,4 @@ const ImageAndProgress = ({ image, progress }: Props) => {
   );
 };
 
-export default ImageAndProgress;
+export default React.memo(ImageAndProgress);

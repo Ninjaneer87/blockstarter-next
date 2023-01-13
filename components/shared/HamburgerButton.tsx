@@ -24,4 +24,4 @@ function HamburgerButton({ black, className, expanded, ...props }: Props){
   );
 };
 
-export default HamburgerButton;
+export default React.memo(HamburgerButton);

@@ -14,6 +14,8 @@ import { useAddress } from '@thirdweb-dev/react';
 import { useAddCampaign } from 'hooks/web3/useAddCampaign';
 import { checkIfImage } from 'utils/utility';
 import { ethers } from 'ethers';
+import { useQueryClient } from 'react-query';
+import AlertSnack from '@/components/shared/snacks/AlertSnack';
 
 const moneyImg = '../../img/money.svg';
 
@@ -29,13 +31,24 @@ const FormSchema = z.object({
 })
 
 const CampaignForm = () => {
+  const [successSnack, setSuccessSnack] = useState(false);
+  const [errorSnack, setErrorSnack] = useState(false);
   const address = useAddress();
-  const [date, setDate] = useState(dayjs(new Date()));
+  const queryClient = useQueryClient();
+  const [date, setDate] = useState(dayjs().add(1, 'day'));
   const { mutate: addCampaign, isLoading: isSubmitting } = useAddCampaign({
     onSuccess: () => {
       zorm.form?.reset();
-      setDate(dayjs(new Date()))
+      setDate(dayjs().add(1, 'day'));
+      queryClient.invalidateQueries("wallet-balance");
+      setSuccessSnack(true)
       // *Congrats popup*
+    },
+    onError: (error: any) => {
+      if (error.reason) {
+        if (error.reason === 'user rejected transaction') return;
+      }
+      setErrorSnack(true);
     }
   });
   const zorm = useZorm("campaign", FormSchema, {
@@ -76,7 +89,7 @@ const CampaignForm = () => {
                     value={date}
                     onChange={handleDate}
                     inputFormat="MM/DD/YYYY"
-                    minDate={dayjs(new Date())}
+                    minDate={dayjs().add(1, 'day')}
                     renderInput={({ InputProps, ...otherProps }) => (
                       <FormField
                         name={field.name}
@@ -115,8 +128,21 @@ const CampaignForm = () => {
             : <ConnectButton />}
         </div>
       </form>
+
+      <AlertSnack
+        open={successSnack}
+        onClose={() => setSuccessSnack(false)}
+        message="Campaign has been created successfully!"
+        severity="success"
+      />
+      <AlertSnack
+        open={errorSnack}
+        onClose={() => setErrorSnack(false)}
+        message="Unable to create a campaign. Please check your balance and try again"
+        severity="error"
+      />
     </>
   );
 };
 
-export default CampaignForm;
+export default React.memo(CampaignForm);

@@ -29,4 +29,4 @@ const ConnectButton = ({ className = '' }: Props) => {
   );
 };
 
-export default ConnectButton;
+export default React.memo(ConnectButton);

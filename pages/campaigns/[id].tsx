@@ -16,7 +16,6 @@ const CampaignDetails: NextPage = () => {
   return (
     campaign
       ? <Container maxWidth='lg' className="p-0 blur-in">
-        {/* <Typography component='h1' variant="h3" className='mb-4 uppercase'>{campaign.title}</Typography> */}
         <h1 className='heading blur-in' >{campaign.title}</h1>  
 
         <div className="grid grid-cols-[1fr] md:grid-cols-[3fr,_1fr] gap-8">

@@ -17,4 +17,4 @@ const CampaignList = ({campaigns}: Props) => {
   );
 };
 
-export default CampaignList;
+export default React.memo(CampaignList);

@@ -61,4 +61,4 @@ const CampaignCard = ({ campaign }: Props) => {
   );
 };
 
-export default CampaignCard;
+export default React.memo(CampaignCard);

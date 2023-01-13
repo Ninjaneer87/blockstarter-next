@@ -3,7 +3,7 @@ import { useNavContext } from 'context/navContext';
 import React from 'react';
 import { FormEventHandler } from 'react';
 
-const search = '../../img/search.svg';
+const search = '/img/search.svg';
 
 const Search = () => {
   const { setExpanded } = useNavContext();
@@ -36,4 +36,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default React.memo(Search);

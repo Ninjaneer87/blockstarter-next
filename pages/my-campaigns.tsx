@@ -3,9 +3,10 @@ import ConnectWallet from '@/components/shared/ConnectWallet';
 import { LinearProgress } from '@mui/material';
 import { useAddress } from '@thirdweb-dev/react';
 import { useCampaigns } from 'hooks/web3/useCampaigns';
+import { NextPage } from 'next';
 import React from 'react';
 
-const Profile = () => {
+const Profile: NextPage = () => {
   const address = useAddress();
   const { data } = useCampaigns({
     select: data => data.filter(d => d.owner === address),
