@@ -35,8 +35,6 @@ function FormField<T extends string>({ icon, name, label, placeholder, type, mul
         {...(placeholder && { placeholder })}
         {...(type === 'number' && {
           inputProps: {
-            minLength: 3,
-            maxLength: 80,
             onInput: floatInputHandler,
             onPaste: floatPasteHandler
           },

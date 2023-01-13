@@ -23,6 +23,7 @@ import Layout from "@/components/layout/Layout";
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useRouteLoading } from "hooks/useRouteLoading";
+import MyLoader from "@/components/shared/MyLoader";
 
 const clientSideEmotionCache = createEmotionCache();
 const darkTheme = responsiveFontSizes(createTheme(darkThemeOptions));
@@ -41,7 +42,6 @@ const MyApp: React.FC<MyAppProps> = (props) => {
   const [dark, toggleDarkMode] = useDarkMode(null);
   const [mounted] = useMounted();
   const theme = dark ? darkTheme : lightTheme;
-  const isRouteLoading = useRouteLoading();
 
   useEffect(() => {
     if (mounted) document.body.style.visibility = "visible";
@@ -65,7 +65,7 @@ const MyApp: React.FC<MyAppProps> = (props) => {
                 <ThemeProvider theme={theme}>
                   <CssBaseline />
                   <ThirdwebProvider desiredChainId={activeChainId}>
-                    {isRouteLoading ? <LinearProgress className="linear-loader" /> : null}
+                    <MyLoader />
                     <Layout>
                       <Component {...pageProps} />
                       <ReactQueryDevtools initialIsOpen={false} />

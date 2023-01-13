@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 import NextLink from "next/link";
 import { useRouter } from "next/dist/client/router";
 import NavContext from "context/navContext";
-import GroupWorkIcon from '@mui/icons-material/GroupWork';
+import WidgetsIcon from '@mui/icons-material/Widgets';
 
 import { ButtonBase } from "@mui/material";
 
@@ -34,7 +34,7 @@ const Logo = ({ withLabel }: Props) => {
         onClick={logoHandler}
       >
         <span className="icon-wrapper text-primary">
-          <GroupWorkIcon fontSize="large" color="primary" />
+          <WidgetsIcon fontSize="large" color="primary" />
         </span>
         {withLabel && (
           <Typography component='span' className="block text-[1.8rem] font-[500] bg-clip-text text-transparent gradient shrink-0">

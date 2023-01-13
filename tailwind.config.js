@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        montserrat: ['Montserrat', 'sans-serif'],
+        montserrat: ['Epilogue', 'sans-serif'],
       },
       colors: {
         'primary': "var(--color-primary)",
@@ -24,6 +24,7 @@ module.exports = {
     },
   },
   plugins: [],
+  darkMode: 'class',
   corePlugins: {
     preflight: false,
   },

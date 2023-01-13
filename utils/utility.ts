@@ -15,7 +15,7 @@ export const isActive = (linkPath: string, currentUrl: string, exact?: boolean):
 
   return exact ? isExact : startsWith;
 }
-export const daysLeft = (deadline: string) => {
+export const daysLeft = (deadline: number) => {
   const difference = new Date(deadline).getTime() - Date.now();
   const remainingDays = difference / (1000 * 3600 * 24);
 
@@ -31,7 +31,7 @@ export const daysLeft = (deadline: string) => {
 };
 
 export const calculateBarPercentage = (goal: number, raisedAmount: number) => {
-  const percentage = Math.round((raisedAmount * 100) / goal);
+  const percentage = Math.min(Math.round((raisedAmount * 100) / goal), 100);
 
   return percentage;
 };

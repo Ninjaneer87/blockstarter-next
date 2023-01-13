@@ -8,7 +8,7 @@ const defaultThemeOptions: ThemeOptions  = {
       sm: 600,
       md: 960,
       lg: 1280,
-      xl: 1920,
+      xl: 1680,
     },
   },
   palette: {
@@ -35,7 +35,7 @@ const defaultThemeOptions: ThemeOptions  = {
     },
   },
   typography: {
-    fontFamily: "Montserrat",
+    fontFamily: "Epilogue",
     fontWeightLight: 200,
     fontWeightRegular: 500,
     fontWeightMedium: 600,

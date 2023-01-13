@@ -36,26 +36,26 @@
     var(--color-secondary) 100%
   );
 
-  &::before,
-  &::after{
-    content: '';
-    position: absolute;
-    width: 125px;
-    height: 125px;
-    border-radius: 50%;
-    filter: blur(200px);
-    z-index: -1;
-    pointer-events: none;
-    opacity: .5;
-  }
-  &::before {
-    top: 0%;
-    left: 0%;
-    background: var(--color-primary);
-  }
-  &::after {
-    bottom: 0%;
-    right: 0%;
-    background: var(--color-secondary);
-  }
+  // &::before,
+  // &::after{
+  //   content: '';
+  //   position: absolute;
+  //   width: 125px;
+  //   height: 125px;
+  //   border-radius: 50%;
+  //   filter: blur(200px);
+  //   z-index: -1;
+  //   pointer-events: none;
+  //   opacity: .5;
+  // }
+  // &::before {
+  //   top: 0%;
+  //   left: 0%;
+  //   background: var(--color-primary);
+  // }
+  // &::after {
+  //   bottom: 0%;
+  //   right: 0%;
+  //   background: var(--color-secondary);
+  // }
 }

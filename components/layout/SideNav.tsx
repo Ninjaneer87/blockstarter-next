@@ -34,11 +34,10 @@ const SideNav = () => {
 
   return (
     <ClientOnlyPortal>
-      {mounted || !isSmallScreen
-        ? <nav
+        <nav
             className={`
               flex flex-col gap-7 justify-between blur-in p-5 rounded-2xl max-lg:shadow-themed-shadow overflow-auto
-              fixed top-[100px] max-sm:left-3 left-6 max-sm:right-3 max-lg:right-6 bg-glass max-sm:bottom-3 bottom-6 z-30
+              fixed top-[100px] max-sm:left-3 left-6 max-sm:right-3 max-lg:right-6 bg-white dark:bg-glass max-sm:bottom-3 bottom-6 z-30
               ${isCollapsed ? 'blur-out' : ''}
             `}
           >
@@ -99,7 +98,6 @@ const SideNav = () => {
               </Tooltip>
             </ul>
           </nav>
-        : null}
 
     </ClientOnlyPortal>
   );

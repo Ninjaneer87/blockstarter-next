@@ -1,18 +1,14 @@
-import CampaignCard from "@/components/shared/CampaignCard";
+import CampaignList from "@/components/features/campaigns/CampaignList";
 import { useCampaigns } from "hooks/web3/useCampaigns";
 import type { NextPage } from "next";
-import Link from "next/link";
 
 const Campaigns: NextPage = () => {
-  const { data } = useCampaigns({
-    onSuccess: (data) => console.log(data)
-  });
+  const { data } = useCampaigns();
 
   return (
     <>
-      <h1>Campaigns</h1>
-      <CampaignCard />
-      <Link href='/campaigns/0'>GO TO CAMPAIGN 0</Link>
+      <h1 className='heading blur-in' >Campaigns</h1>
+      {data ? <CampaignList campaigns={data} /> : null}
     </>
   );
 };

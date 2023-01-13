@@ -4,7 +4,7 @@ import React from 'react';
 const NewCampaign = () => {
   return (
     <>
-      <h1 className='heading my-14 blur-in'>Start a Campaign</h1>
+      <h1 className='heading blur-in'>Start a Campaign</h1>
       <CampaignForm />
     </>
   );

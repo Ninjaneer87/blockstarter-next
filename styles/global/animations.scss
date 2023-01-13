@@ -1,7 +1,7 @@
 .blur-in {
   animation: blur-in 200ms ease-in;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: backwards;
+  -webkit-animation-fill-mode: backwards;
 }
 @keyframes blur-in {
   0% {

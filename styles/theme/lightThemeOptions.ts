@@ -10,6 +10,9 @@ const lightThemeOptions: ThemeOptions  = {
       paper: "#ffffffcc",
       default: "#f0f0f3",
     },
+    text: {
+      primary: 'rgba(0, 0, 0, .8)'
+    }
   },
 }
 

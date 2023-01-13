@@ -1,5 +1,3 @@
-import Logo from "@/components/shared/Logo";
-import CampaignCard from "@/components/shared/CampaignCard";
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {

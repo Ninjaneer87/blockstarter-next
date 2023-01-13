@@ -13,10 +13,10 @@ import { CampaignFieldName } from '@/components/features/new-campaign/CampaignFo
 
 export const navItems = [
   {
-    label: 'all campaigns',
+    label: 'campaigns',
     icon: <WindowIcon fontSize="large" />,
     path: '/campaigns',
-    exact: true,
+    exact: false,
   },
   {
     label: 'my campaigns',

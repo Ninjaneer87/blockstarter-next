@@ -15,6 +15,8 @@ import { useAddCampaign } from 'hooks/web3/useAddCampaign';
 import { checkIfImage } from 'utils/utility';
 import { ethers } from 'ethers';
 
+const moneyImg = '../../img/money.svg';
+
 export type CampaignFieldName = "fullname" | "title" | "story" | "target" | "deadline" | "image";
 
 const FormSchema = z.object({
@@ -58,11 +60,11 @@ const CampaignForm = () => {
   
   return (
     <>
-      {isSubmitting ? <LinearProgress className="linear-loader" />: null}
+      {isSubmitting ? <LinearProgress color='secondary' className="linear-loader" />: null}
 
       <form 
         ref={zorm.ref} 
-        className='max-w-[1280px] mx-auto flex flex-wrap gap-20 my-14 bg-themed-bg-paper p-4 sm:p-8 rounded-2xl blur-in' 
+        className='max-w-[1280px] mx-auto flex flex-wrap gap-20 mb-14 bg-themed-bg-paper p-4 sm:p-8 rounded-2xl blur-in' 
       >
         {campaignFormItems.map(field => (
           <div key={field.name} className={`grow ${field.multiline ? 'basis-full' : 'basis-72'}`}>
@@ -98,9 +100,14 @@ const CampaignForm = () => {
           </div>
         ))}
 
+        <div className='flex items-center text-white bg-secondary px-4 py-8 rounded-2xl gap-4 w-full font-semibold'>
+          <img src={moneyImg} alt="Cash" />
+          <span className='sm:text-2xl'>You will get 100% of the raised amount</span>
+        </div>
+
         <div className="w-full flex justify-center items-center">
           {address 
-            ? <ButtonBase disabled={isSubmitting} className='blur-in gradient-button w-[400px] max-w-full' type='submit' >
+            ? <ButtonBase focusRipple disabled={isSubmitting} className='blur-in gradient-button w-[400px] max-w-full' type='submit' >
                 {isSubmitting 
                   ? <CircularProgress color='inherit' size={24} /> 
                   : <>Create campaign <CampaignIcon /></>}
