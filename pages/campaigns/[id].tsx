@@ -18,18 +18,18 @@ const CampaignDetails: NextPage = () => {
       ? <Container maxWidth='lg' className="p-0 blur-in">
         <h1 className='heading blur-in' >{campaign.title}</h1>  
 
-        <div className="grid grid-cols-[1fr] md:grid-cols-[3fr,_1fr] gap-8">
+        <div className="grid grid-cols-[1fr] md:grid-cols-[2fr,_1fr] gap-8">
           <ImageAndProgress image={campaign.image} progress={donationProgress} />
+          <Donate campaignId={campaign.pId} />
+        </div>
+
+        <div className="grid grid-cols-[1fr] sm:grid-cols-[1fr,_1fr] md:grid-cols-[1fr,_3fr] mt-8 gap-8">
           <DonationStats 
             daysLeft={daysLeft(campaign.deadline)} 
             amountRaised={campaign.sumOfAllDonations} 
             backersCount={campaign.donators?.length} 
             target={campaign.target}
           />
-        </div>
-
-        <div className="grid grid-cols-[1fr] md:grid-cols-[1fr,_1fr] xl:grid-cols-[1fr,_2fr] mt-8 gap-8">
-          <Donate campaignId={campaign.pId} />
           <CampaignInfo 
             owner={campaign.owner}
             story={campaign.description}
