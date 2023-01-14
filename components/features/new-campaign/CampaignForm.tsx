@@ -33,6 +33,7 @@ const FormSchema = z.object({
 const CampaignForm = () => {
   const [successSnack, setSuccessSnack] = useState(false);
   const [errorSnack, setErrorSnack] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const address = useAddress();
   const queryClient = useQueryClient();
   const [date, setDate] = useState(dayjs().add(1, 'day'));
@@ -42,12 +43,12 @@ const CampaignForm = () => {
       setDate(dayjs().add(1, 'day'));
       queryClient.invalidateQueries("wallet-balance");
       setSuccessSnack(true)
-      // *Congrats popup*
     },
     onError: (error: any) => {
       if (error.reason) {
         if (error.reason === 'user rejected transaction') return;
       }
+      setErrorMessage("Unable to create a campaign. Please check your balance and try again")
       setErrorSnack(true);
     }
   });
@@ -60,7 +61,9 @@ const CampaignForm = () => {
       };
       checkIfImage(form.image, (exists) => {
         if(!exists) {
-          console.log('Provide valid image URL');
+          setErrorMessage("Unable to create a campaign. Please provide a valid image URL")
+          setErrorSnack(true);
+          return;
         }
         addCampaign(form);
       })
@@ -138,7 +141,7 @@ const CampaignForm = () => {
       <AlertSnack
         open={errorSnack}
         onClose={() => setErrorSnack(false)}
-        message="Unable to create a campaign. Please check your balance and try again"
+        message={errorMessage}
         severity="error"
       />
     </>

@@ -1,5 +1,5 @@
 import FormField from '@/components/shared/FormField';
-import { Alert, ButtonBase, CircularProgress, LinearProgress, Snackbar } from '@mui/material';
+import { ButtonBase, CircularProgress, LinearProgress } from '@mui/material';
 import { useDonate } from 'hooks/web3/useDonate';
 import React, { useState } from 'react';
 import { useZorm } from 'react-zorm';

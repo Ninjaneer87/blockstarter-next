@@ -1,3 +1,7 @@
+import { Campaign } from "@/types/campaign";
+import { CampaignResponse } from "@/types/campaign-response";
+import { ethers } from "ethers";
+
 export function formatAddress(address: string) {
   const addressArray = address.split("");
   const firstPart = addressArray.slice(0, 4);
@@ -15,12 +19,13 @@ export const isActive = (linkPath: string, currentUrl: string, exact?: boolean):
 
   return exact ? isExact : startsWith;
 }
+
 export const daysLeft = (deadline: number) => {
   const difference = new Date(deadline).getTime() - Date.now();
   const remainingDays = difference / (1000 * 3600 * 24);
 
   let result = remainingDays.toFixed(0);
-  if(remainingDays === 0) {
+  if(remainingDays < 1) {
     result = 'Last day';
   }
   if(remainingDays < 0) {
@@ -30,10 +35,17 @@ export const daysLeft = (deadline: number) => {
   return result;
 };
 
-export const calculateBarPercentage = (goal: number, raisedAmount: number) => {
+export const calculateProgress = (goal: number, raisedAmount: number) => {
   const percentage = Math.min(Math.round((raisedAmount * 100) / goal), 100);
 
   return percentage;
+};
+
+export const isCampaignExpired = (deadline: number, goal: number, raisedAmount: number) => {
+  const passedTheDeadline = daysLeft(deadline) === 'Expired';
+  const targetReached = calculateProgress(goal, raisedAmount) === 100;
+
+  return passedTheDeadline && !targetReached;
 };
 
 export const checkIfImage = (url: string, callback: (exists: boolean) => void) => {
@@ -69,3 +81,33 @@ export const floatPasteHandler = (e: React.ClipboardEvent<HTMLInputElement | HTM
     e.preventDefault();
   } 
 }
+
+export const parseCampaign = (campaign: CampaignResponse, pId: number): Campaign => {
+  const { owner, title, description, image, donators } = campaign;
+
+  const target = ethers.utils.formatEther(campaign.target.toString());
+  const deadline = campaign.deadline.toNumber() * 1000 // block timestamps are in seconds
+  const ownerBalance = ethers.utils.formatEther(campaign.ownerBalance);
+  const sumOfAllDonations = ethers.utils.formatEther(campaign.sumOfAllDonations);
+  const donations = campaign.donations.map((d) => ethers.utils.formatEther(d.toString()));
+  const isExpired =  isCampaignExpired(deadline, +target, +sumOfAllDonations);
+  const amountProgress = calculateProgress(+target, +sumOfAllDonations);
+
+  const parsedCampaign: Campaign = {
+    pId,
+    owner,
+    title,
+    description,
+    target,
+    deadline,
+    ownerBalance,
+    sumOfAllDonations,
+    image,
+    donators,
+    donations,
+    isExpired,
+    amountProgress
+  };
+
+  return parsedCampaign;
+};

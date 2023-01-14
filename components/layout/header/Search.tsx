@@ -21,7 +21,7 @@ const Search = () => {
     >
       <input
         type="text"
-        placeholder="Search for campaigns"
+        placeholder="Search coming soon..."
         className="w-full text-sm placeholder:text-placeholder bg-transparent outline-none border-none text-themed-text"
         spellCheck={false}
       />

@@ -1,6 +1,5 @@
 import CampaignList from '@/components/features/campaigns/CampaignList';
 import ConnectWallet from '@/components/shared/ConnectWallet';
-import { LinearProgress } from '@mui/material';
 import { useAddress } from '@thirdweb-dev/react';
 import { useCampaigns } from 'hooks/web3/useCampaigns';
 import { NextPage } from 'next';

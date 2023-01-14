@@ -10,4 +10,6 @@ export type Campaign = {
   image: string;
   donators?: string[];
   donations?: string[];
+  isExpired: boolean;
+  amountProgress: number;
 }

@@ -10,6 +10,7 @@ type Props = { campaign: Campaign };
 
 const CampaignCard = ({ campaign }: Props) => {
   const { dark } = useThemeContext();
+  const remainingDays = daysLeft(campaign.deadline);
 
   return (
     <div className={`${dark ? 'gradient-wrapper' : ''} w-full`}>
@@ -37,15 +38,30 @@ const CampaignCard = ({ campaign }: Props) => {
 
         <div className="grid grid-cols-2 text-xs">
           <div >
-            <p>ETH <span className='dark:opacity-80 text-primary'>{campaign.sumOfAllDonations}</span></p>
+            <p>
+              ETH {' '}
+              <span 
+                className={`
+                  dark:opacity-80
+                  ${campaign.isExpired ? 'text-red-400' : ''} 
+                  ${campaign.amountProgress === 100 ? 'text-primary' : ''}
+                `}
+              >
+                {campaign.sumOfAllDonations}
+              </span>
+            </p>
             <p title={campaign.target} className='truncate dark:opacity-60'>Raised of {campaign.target}</p>
           </div>
+
           <div className='text-right'>
-            <p>{daysLeft(campaign.deadline)}</p>
-            <p className='dark:opacity-60'>Days remaining</p>
+            <p className={`${campaign.isExpired ? 'text-red-400' : ''} ${campaign.amountProgress === 100 ? 'text-primary' : ''}`}>
+              {campaign.amountProgress === 100 ? 'Target reached' : remainingDays}
+            </p>
+            <p className='dark:opacity-60'>
+              {campaign.amountProgress === 100 ? 'Accepting donations' : 'Days remaining'}
+            </p>
           </div>
         </div>
-
 
         <div className="flex items-center gap-2 text-xs mt-4 font-normal">
           <span className='bg-themed-bg rounded-full p-2 h-8 w-8 flex items-center justify-center'>
