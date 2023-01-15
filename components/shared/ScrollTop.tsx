@@ -24,7 +24,7 @@ const ScrollTop = () => {
         color="primary"
         aria-label="scroll-top"
         onClick={scrollToTop}
-        className={`fixed bottom-3 right-3 p-2 transform transition-all duration-300 ease-in-out border-solid border-2 border-accent z-20 bg-glass ${
+        className={`hidden sm:flex fixed bottom-3 right-3 p-2 transform transition-all duration-300 ease-in-out border-solid border-2 border-accent z-20 bg-glass ${
           !pageTopInView ? "translate-x-0" : "translate-x-[200%]"
         }`}
         size="medium"

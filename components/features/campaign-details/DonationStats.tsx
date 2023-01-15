@@ -11,8 +11,8 @@ type Props = {
 const DonationStats = ({ daysLeft, amountRaised, target, isExpired, backersCount = 0 }: Props) => {
   const statItems = [
     { id: 1, value: amountRaised > target ? 'Indefinite' : daysLeft, label: 'Days left' },
-    { id: 2, value: amountRaised, label: `ETH raised of ${target}` },
-    { id: 3, value: backersCount, label: 'Total backers' },
+    { id: 2, value: amountRaised, label: `GOR raised of ${target}` },
+    { id: 3, value: backersCount, label: 'Total donations count' },
   ];
 
   return (

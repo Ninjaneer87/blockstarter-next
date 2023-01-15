@@ -1,4 +1,5 @@
-import { ButtonBase, Tooltip, useMediaQuery, useTheme, Divider } from '@mui/material';
+import { useEffect } from 'react';
+import { ButtonBase, useMediaQuery, useTheme, Divider } from '@mui/material';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -10,14 +11,15 @@ import ClientOnlyPortal from '../portals/ClientOnlyPortal';
 import { useThemeContext } from 'context/themeContext';
 import { useNavContext } from 'context/navContext';
 import AuthInfo from '../shared/AuthInfo';
-import { useAddress, useDisconnect } from '@thirdweb-dev/react';
+import { useDisconnect } from '@thirdweb-dev/react';
 import Search from './header/Search';
+import { useWeb3Context } from 'context/web3Context';
 
 const SideNav = () => {
   const { expanded, mounted, setExpanded } = useNavContext();
   const { asPath: currentUrl } = useRouter();
   const { dark, toggleDarkMode } = useThemeContext();
-  const address = useAddress();
+  const { address } = useWeb3Context();
   const disconnect = useDisconnect();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down(1024));
@@ -32,12 +34,16 @@ const SideNav = () => {
     if(isSmallScreen) setExpanded(false)
   }
 
+  useEffect(() => {
+    setExpanded(false);
+  }, [isSmallScreen])
+
   return (
     <ClientOnlyPortal>
         <nav
             className={`
               flex flex-col gap-7 justify-between blur-in p-5 rounded-2xl max-lg:shadow-themed-shadow overflow-auto
-              fixed top-[100px] max-sm:left-3 left-6 max-sm:right-3 max-lg:right-6 bg-white dark:bg-glass max-sm:bottom-3 bottom-6 z-30
+              fixed top-[100px] max-sm:left-3 left-6 max-sm:right-3 max-lg:right-6 bg-glass max-sm:bottom-3 bottom-6 z-30
               ${isCollapsed ? 'blur-out' : ''}
             `}
           >
@@ -46,7 +52,7 @@ const SideNav = () => {
               : null}
             <ul className='flex flex-col gap-3 lg:gap-7'>
               {navItems.map(item => (
-                <Tooltip title={`${isSmallScreen ? "" : item.label}`} key={item.path} arrow placement='right'>
+                <li key={item.path} className='flex flex-col lg:items-center gap-1 max-lg:w-full'>
                   <ButtonBase
                     aria-label={item.label}
                     focusRipple
@@ -54,11 +60,16 @@ const SideNav = () => {
                     href={item.path}
                     LinkComponent={NextLink}
                     onClick={handleClose}
-                    className={`icon-wrapper text-primary justify-start gap-3 ${isActive(item.path, currentUrl, item.exact) ? "bg-themed-bg" : ""}`}
+                    className={`icon-wrapper justify-start gap-3 ${isActive(item.path, currentUrl, item.exact) ? "bg-themed-bg text-primary" : ""} lg:w-fit`}
                   >
                     {item.icon} {isSmallScreen ? <span>{item.label}</span> : ''}
                   </ButtonBase>
-                </Tooltip>
+                  {isSmallScreen 
+                    ? null 
+                    : <span className={`text-[0.6rem] ${isActive(item.path, currentUrl, item.exact) ? "text-primary" : ""}`}>
+                        {item.label}
+                      </span>}
+                </li>
               ))}
             </ul>
 
@@ -72,30 +83,36 @@ const SideNav = () => {
 
             <ul className='flex flex-col gap-3 lg:gap-7'>
               {address 
-                ? <Tooltip title={`${isSmallScreen ? "" : "logout"}`} arrow placement='right'>
+                ? <li className='flex flex-col lg:items-center gap-1 max-lg:w-full'>
                     <ButtonBase
                       aria-label="Logout"
                       focusRipple
                       color="primary"
-                      className='icon-wrapper text-primary justify-start gap-3 text-base grow blur-in'
+                      className='icon-wrapper justify-start gap-3 text-base grow blur-in'
                       onClick={handleLogout}
                     >
-                      <LogoutIcon fontSize='large' color='primary' /> {isSmallScreen ? <span>logout</span> : ''}
+                      <LogoutIcon fontSize='large' /> {isSmallScreen ? <span>logout</span> : ''}
                     </ButtonBase>
-                  </Tooltip>
+                    {isSmallScreen 
+                      ? null 
+                      : <span className='text-[0.6rem]'>disconnect</span>}
+                  </li>
                 : null}
 
-              <Tooltip title={`${isSmallScreen ? "" : "theme"}`} arrow placement='right'>
+              <li className='flex flex-col lg:items-center gap-1 max-lg:w-full'>
                 <ButtonBase
                   aria-label="dark toggle"
                   focusRipple
                   color="primary"
-                  className={`icon-wrapper text-primary justify-start gap-3 text-base ${dark ? 'bg-themed-bg' : ''}`}
+                  className={`icon-wrapper justify-start gap-3 text-base ${dark ? 'bg-themed-bg text-primary' : ''}`}
                   onClick={toggleDarkMode}
                 >
-                  <NightsStayIcon fontSize='large' color='primary' /> {isSmallScreen ? <span>theme</span> : ''}
+                  <NightsStayIcon fontSize='large' /> {isSmallScreen ? <span>theme</span> : ''}
                 </ButtonBase>
-              </Tooltip>
+                {isSmallScreen 
+                  ? null 
+                  : <span className={`text-[0.6rem] ${dark ? "text-primary" : ""}`}>theme</span>}
+              </li>
             </ul>
           </nav>
 

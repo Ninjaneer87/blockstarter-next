@@ -13,12 +13,12 @@ const Home: NextPage = () => {
   const count = useMemo(() => {
     if (!data) return;
 
-    const campaingCount = data.length;
+    const campaignCount = data.length;
     const owners = data.map(campaign => campaign.owner);
     const uniqueOwners = [...new Set(owners)];
     const ownersCount = uniqueOwners.length;
 
-    return { campaingCount, ownersCount }
+    return { campaignCount, ownersCount }
   }, [data])
 
   return (
@@ -38,7 +38,7 @@ const Home: NextPage = () => {
             <div className="grid grid-cols-[1fr,1fr] rounded-2xl bg-themed-bg-paper p-6 gap-8 w-fit">
               <div className='w-full flex flex-col'>
                 <div className='text-4xl font-bold grow flex items-center text-primary'>
-                  <span className='truncate max-w-[250px]'>{count?.campaingCount}</span>
+                  <span className='truncate max-w-[250px]'>{count?.campaignCount}</span>
                 </div>
                 <div className='opacity-90 mt-2 flex items-center font-light'>
                   <span className='truncate max-w-[250px]'>Campaigns</span>

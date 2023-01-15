@@ -73,7 +73,7 @@ const WalletModal = ({ isOpen, handleClose }: Props) => {
         <Divider className="my-3 bg-secondary" />
 
         <div className="flex items-center gap-2 text-xs">
-          <InfoIcon color="secondary" fontSize="small" /> Choose GOERLI TESTNET network
+          <InfoIcon color="secondary" fontSize="small" /> Choose GOERLI TESTNET for network
         </div>
 
       </DialogContent>

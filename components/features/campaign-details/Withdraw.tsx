@@ -69,8 +69,9 @@ const Withdraw = ({ campaignId, amount, type }: Props) => {
         </div>
 
         <ButtonBase 
-          focusRipple disabled={isRefunding || isCashingOut} 
-          className='gradient-button'
+          focusRipple 
+          disabled={isRefunding || isCashingOut || !(+amount > 0)} 
+          className={`gradient-button ${isRefunding || isCashingOut || !(+amount > 0) ? 'grayscale' : ''}`}
           onClick={handleWithdraw}
         >
           {isRefunding || isCashingOut

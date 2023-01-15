@@ -7,9 +7,10 @@ type Props = {
   story: string;
   donators: string[];
   donations: string[];
+  isExpired: boolean;
 }
 
-const CampaignInfo = ({ owner, story, donators, donations} : Props) => {
+const CampaignInfo = ({ owner, story, donators, donations, isExpired } : Props) => {
   return (
     <div className='font-light'>
       <h3 className='uppercase mb-2 mt-0'>Starter</h3>
@@ -21,7 +22,9 @@ const CampaignInfo = ({ owner, story, donators, donations} : Props) => {
       <h3 className='uppercase mb-2'>Top donators</h3>
       {donators.length 
         ? <DonationsList donators={donators} donations={donations} />
-        : <div className='text-sm dark:opacity-70 '>No donations yet. Be the first to donate</div> }
+        : <div className='text-sm dark:opacity-70 '>
+            {isExpired ? 'No donations here.' : 'No donations yet. Be the first to donate'}
+          </div> }
     </div>
   );
 };

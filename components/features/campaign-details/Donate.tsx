@@ -7,20 +7,23 @@ import { z } from 'zod';
 import SavingsIcon from '@mui/icons-material/Savings';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import ConnectButton from '@/components/shared/ConnectButton';
-import { useAddress } from '@thirdweb-dev/react';
 import { useQueryClient } from 'react-query';
 import AlertSnack from '@/components/shared/snacks/AlertSnack';
+import { useWeb3Context } from 'context/web3Context';
 
 const FormSchema = z.object({
   amount: z.string().refine(val => Number(val) > 0, { message: 'Amount must be greater than 0' }),
 });
 
-type Props = { campaignId: number }
+type Props = { 
+  campaignId: number;
+  target: string;
+}
 
-const Donate = ({ campaignId }: Props) => {
+const Donate = ({ campaignId, target }: Props) => {
   const [errorSnack, setErrorSnack] = useState(false);
   const [successSnack, setSuccessSnack] = useState(false);
-  const address = useAddress();
+  const { address } = useWeb3Context();
   const queryClient = useQueryClient();
   const { mutate: donate, isLoading: isSubmitting } = useDonate({
     onSuccess: () => {
@@ -58,7 +61,7 @@ const Donate = ({ campaignId }: Props) => {
         <FormField
           name="amount"
           label="Donation amount"
-          placeholder="ETH 0.1"
+          placeholder={`${target} GOR `}
           icon={<SavingsIcon color='primary' />}
           type="number"
           error={zorm.errors.amount(Boolean)}
@@ -85,7 +88,7 @@ const Donate = ({ campaignId }: Props) => {
           </ButtonBase>
           : <ConnectButton className='w-full' />}
       </form>
-      
+
       <AlertSnack
         open={successSnack}
         onClose={() => setSuccessSnack(false)}

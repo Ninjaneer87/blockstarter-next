@@ -24,6 +24,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useRouteLoading } from "hooks/useRouteLoading";
 import MyLoader from "@/components/shared/MyLoader";
+import { Web3ContextProvider } from "context/web3Context";
 
 const clientSideEmotionCache = createEmotionCache();
 const darkTheme = responsiveFontSizes(createTheme(darkThemeOptions));
@@ -65,11 +66,13 @@ const MyApp: React.FC<MyAppProps> = (props) => {
                 <ThemeProvider theme={theme}>
                   <CssBaseline />
                   <ThirdwebProvider desiredChainId={activeChainId}>
-                    <MyLoader />
-                    <Layout>
-                      <Component {...pageProps} />
-                      <ReactQueryDevtools initialIsOpen={false} />
-                    </Layout>
+                    <Web3ContextProvider>
+                      <MyLoader />
+                      <Layout>
+                        <Component {...pageProps} />
+                        <ReactQueryDevtools initialIsOpen={false} />
+                      </Layout>
+                    </Web3ContextProvider>
                   </ThirdwebProvider>
                 </ThemeProvider>
               </CacheProvider>

@@ -5,11 +5,13 @@ import { daysLeft } from 'utils/utility';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import { Divider } from '@mui/material';
 import { useThemeContext } from 'context/themeContext';
+import { useWeb3Context } from 'context/web3Context';
 
 type Props = { campaign: Campaign };
 
 const CampaignCard = ({ campaign }: Props) => {
   const { dark } = useThemeContext();
+  const { balance } = useWeb3Context();
   const remainingDays = daysLeft(campaign.deadline);
 
   return (
@@ -39,7 +41,7 @@ const CampaignCard = ({ campaign }: Props) => {
         <div className="grid grid-cols-2 text-xs">
           <div >
             <p>
-              ETH {' '}
+              GOR {' '}
               <span 
                 className={`
                   dark:opacity-80

@@ -1,9 +1,11 @@
 import ConnectButton from '@/components/shared/ConnectButton';
-import { useAddress } from '@thirdweb-dev/react';
+import { useWeb3Context } from 'context/web3Context';
 import React from 'react';
 
-const Expired = () => {
-  const address = useAddress();
+type Props = { amount: number }
+
+const Expired = ({ amount }: Props) => {
+  const { address } = useWeb3Context();
 
   return (
     <>
@@ -15,14 +17,14 @@ const Expired = () => {
 
           <small className='mt-3 flex shrink-0 items-start text-secondary'>Good luck!</small>
         </div>
-        {!address 
+        {!address && amount
           ? <>
-              <div className='text-sm rounded-lg'>
-                <div className='opacity-80 font-normal'>Connect your wallet to check for a possible refund</div>
-              </div>
+            <div className='text-sm rounded-lg'>
+              <div className='opacity-80 font-normal'>Connect your wallet to check for a possible refund</div>
+            </div>
 
-              <ConnectButton /> 
-            </>
+            <ConnectButton />
+          </>
           : null}
       </div>
     </>

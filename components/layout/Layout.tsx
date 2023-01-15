@@ -2,11 +2,14 @@ import React, { PropsWithChildren } from "react";
 import Header from "./header/Header";
 import SideNav from "./SideNav";
 import ScrollTop from "../shared/ScrollTop";
-import { Container, LinearProgress } from "@mui/material";
+import { Container, LinearProgress, useMediaQuery, useTheme } from "@mui/material";
 import { useRouteLoading } from "hooks/useRouteLoading";
 import { useIsFetching } from "react-query";
+import DrawerMobile from "./DrawerMobile";
 
 const Layout = ({ children }: PropsWithChildren) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down(639));
   const isRouteLoading = useRouteLoading();
   const isQueryLoading = useIsFetching({ predicate: query => query.state.status === 'loading' }) > 0;
 
@@ -21,6 +24,7 @@ const Layout = ({ children }: PropsWithChildren) => {
         </Container>
       </main>
       <ScrollTop />
+      {isSmallScreen ? <DrawerMobile /> : null}
     </>
   );
 };

@@ -1,5 +1,4 @@
 import CampaignIcon from '@mui/icons-material/Campaign';
-import WindowIcon from '@mui/icons-material/Window';
 import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility';
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
 import { FormFieldProps } from '@/components/shared/FormField';
@@ -9,29 +8,30 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import EventIcon from '@mui/icons-material/Event';
 import PhotoIcon from '@mui/icons-material/Photo';
 import SavingsIcon from '@mui/icons-material/Savings';
+import WidgetsIcon from '@mui/icons-material/Widgets';
 import { CampaignFieldName } from '@/components/features/new-campaign/CampaignForm';
 
 export const navItems = [
   {
     label: 'campaigns',
-    icon: <WindowIcon fontSize="large" />,
+    icon: <WidgetsIcon fontSize="large" />,
     path: '/campaigns',
     exact: false,
   },
   {
-    label: 'my campaigns',
+    label: 'profile',
     icon: <SettingsAccessibilityIcon fontSize="large" />,
-    path: '/my-campaigns',
+    path: '/profile',
     exact: false,
   },
   {
-    label: 'new campaign',
+    label: 'create',
     icon: <CampaignIcon fontSize="large" />,
-    path: '/new-campaign',
+    path: '/create',
     exact: true,
   },
   {
-    label: 'how to use',
+    label: 'manual',
     icon: <PsychologyAltIcon fontSize="large" />,
     path: '/manual',
     exact: true,
@@ -63,8 +63,8 @@ export const campaignFormItems: CampaignFormItem[] = [
   },
   {
     name: 'target',
-    label: 'Target amount (ETH) *',
-    placeholder: 'ETH 0.5',
+    label: 'Target amount *',
+    placeholder: 'GOR 0.5',
     type: 'number',
     icon: <SavingsIcon color='primary' />,
   },

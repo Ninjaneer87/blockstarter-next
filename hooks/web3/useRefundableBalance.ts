@@ -1,19 +1,15 @@
-import { Campaign } from "@/types/campaign";
-import { CampaignResponse } from "@/types/campaign-response";
-import { useAddress, useContract } from "@thirdweb-dev/react";
+import { useWeb3Context } from "context/web3Context";
 import { ethers } from "ethers";
-import { useQuery, useQueryClient, UseQueryOptions } from "react-query";
-import { parseCampaign } from "utils/utility";
+import { useQuery, UseQueryOptions } from "react-query";
 
 export const useRefundableBalance = (
-  id: string,
+  id: number,
   options?: Omit<
-    UseQueryOptions<string, unknown, string, ["refundable-balance", string]>,
+    UseQueryOptions<string, unknown, string, ["refundable-balance", number]>,
     "queryKey" | "queryFn"
   >
 ) => {
-  const { contract } = useContract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
-  const address = useAddress();
+  const { contract, address } = useWeb3Context();
 
   const fetchRefundableBalance = async () => {
     const balance: number = await contract!.call("getRefundableBalance", id);
@@ -21,12 +17,12 @@ export const useRefundableBalance = (
     return parsedBalance;
   }
 
-  return useQuery<string, unknown, string, ["refundable-balance", string]>(
+  return useQuery<string, unknown, string, ["refundable-balance", number]>(
     ["refundable-balance", id],
     fetchRefundableBalance,
     {
       ...options,
-      enabled: !!address && !!contract
+      enabled: !!address && !!contract && !isNaN(id)
     }
   );
 };

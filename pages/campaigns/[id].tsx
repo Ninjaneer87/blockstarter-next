@@ -5,7 +5,7 @@ import Expired from "@/components/features/campaign-details/Expired";
 import ImageAndProgress from "@/components/features/campaign-details/ImageAndProgress";
 import Withdraw from "@/components/features/campaign-details/Withdraw";
 import { Container, Alert, AlertTitle } from "@mui/material";
-import { useAddress } from "@thirdweb-dev/react";
+import { useWeb3Context } from "context/web3Context";
 import { useCampaign } from "hooks/web3/useCampaign";
 import { useRefundableBalance } from "hooks/web3/useRefundableBalance";
 import type { NextPage } from "next";
@@ -14,15 +14,15 @@ import { useState } from "react";
 import { daysLeft } from "utils/utility";
 
 const CampaignDetails: NextPage = () => {
-  const address = useAddress();
+  const { address } = useWeb3Context();
   const { query: { id } } = useRouter();
   const [invalidCampaign, setInvalidCampaign] = useState(false);
-  const { data: campaign, isLoading } = useCampaign(id! as string, {
+  const { data: campaign, isLoading } = useCampaign(+id!, {
     onSettled: (data) => {!data && setInvalidCampaign(true)}
   });
-  // const {data: refundableBalance} = useRefundableBalance(id! as string);
-  const refundableBalance = "0.000";
-  // const refundableBalance = undefined;
+  const {data: refundableBalance} = useRefundableBalance(+id!, {
+    select: data => data === undefined ? "0" : data
+  });
 
   return (
     <>
@@ -54,17 +54,17 @@ const CampaignDetails: NextPage = () => {
 
               {/* Campaign is active  (hide it if the user is owner and target is reached)*/}
               {!campaign.isExpired && !(campaign.owner === address && campaign.amountProgress === 100)
-                ? <Donate campaignId={campaign.pId} />
+                ? <Donate campaignId={campaign.pId} target={campaign.target} />
                 : null}
 
               {/* Campaign expired, user not connected or has NO withdrawable balance */}
-              {campaign.isExpired && !address || (campaign.isExpired && address && !(+refundableBalance > 0))
-                ? <Expired />
+              {campaign.isExpired && !address || (campaign.isExpired && address && !(+refundableBalance! > 0))
+                ? <Expired amount={+campaign.ownerBalance} />
                 : null}
 
               {/* Campaign expired, user has withdrawable balance */}
-              {campaign.isExpired && address && +refundableBalance > 0
-                ? <Withdraw type="refund" campaignId={campaign.pId} amount={refundableBalance} />
+              {campaign.isExpired && address &&  +refundableBalance! > 0
+                ? <Withdraw type="refund" campaignId={campaign.pId} amount={refundableBalance!} />
                 : null}
 
               {/* Campaign SUCCESS and user is the campaign owner*/}
@@ -86,6 +86,7 @@ const CampaignDetails: NextPage = () => {
                 story={campaign.description}
                 donators={campaign.donators || []}
                 donations={campaign.donations || []}
+                isExpired={campaign.isExpired}
               />
             </div>
           </Container>

@@ -10,12 +10,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import FormField from '@/components/shared/FormField';
 import { campaignFormItems } from 'utils/constants';
 import ConnectButton from '@/components/shared/ConnectButton';
-import { useAddress } from '@thirdweb-dev/react';
 import { useAddCampaign } from 'hooks/web3/useAddCampaign';
 import { checkIfImage } from 'utils/utility';
 import { ethers } from 'ethers';
 import { useQueryClient } from 'react-query';
 import AlertSnack from '@/components/shared/snacks/AlertSnack';
+import { useWeb3Context } from 'context/web3Context';
 
 const moneyImg = '../../img/money.svg';
 
@@ -34,7 +34,7 @@ const CampaignForm = () => {
   const [successSnack, setSuccessSnack] = useState(false);
   const [errorSnack, setErrorSnack] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const address = useAddress();
+  const { address } = useWeb3Context();
   const queryClient = useQueryClient();
   const [date, setDate] = useState(dayjs().add(1, 'day'));
   const { mutate: addCampaign, isLoading: isSubmitting } = useAddCampaign({
@@ -80,7 +80,7 @@ const CampaignForm = () => {
 
       <form 
         ref={zorm.ref} 
-        className='max-w-[1280px] mx-auto flex flex-wrap gap-20 mb-14 bg-themed-bg-paper p-4 sm:p-8 rounded-2xl blur-in' 
+        className='max-w-[1280px] mx-auto flex flex-wrap gap-10 sm:gap-20 mb-14 bg-themed-bg-paper p-4 py-8 sm:p-8 rounded-2xl blur-in' 
       >
         {campaignFormItems.map(field => (
           <div key={field.name} className={`grow ${field.multiline ? 'basis-full' : 'basis-72'}`}>
@@ -128,7 +128,7 @@ const CampaignForm = () => {
                   ? <CircularProgress color='inherit' size={24} /> 
                   : <>Create campaign <CampaignIcon /></>}
               </ButtonBase>
-            : <ConnectButton />}
+            : <ConnectButton className='w-[500px] max-w-full' />}
         </div>
       </form>
 

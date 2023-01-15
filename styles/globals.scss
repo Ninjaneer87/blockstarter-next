@@ -16,7 +16,7 @@
 
 @layer components {
   .bg-glass {
-    @apply backdrop-blur-lg bg-themed-bg-paper;
+    @apply  backdrop-blur-3xl bg-themed-bg-paper;
   }
   .icon-wrapper {
     @apply p-2 rounded-2xl flex items-center justify-center transition-all min-h-[51px] min-w-[51px];

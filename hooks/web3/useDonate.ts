@@ -1,4 +1,4 @@
-import { useContract } from "@thirdweb-dev/react";
+import { useWeb3Context } from "context/web3Context";
 import { ethers } from "ethers";
 import { useMutation, UseMutationOptions } from "react-query";
 
@@ -10,10 +10,10 @@ export const useDonate = (
     "mutationFn"
   >
 ) => {
-  const { contract } = useContract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
+  const { contract } = useWeb3Context();
 
   const donate = async ({ id, amount }: DonationParams) => {
-    await contract?.call("donateToProject", id, {
+    await contract?.call("donate", id, {
       value: ethers.utils.parseEther(amount),
     });
   };

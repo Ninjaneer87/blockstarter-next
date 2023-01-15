@@ -1,6 +1,6 @@
 import { Campaign } from "@/types/campaign";
 import { CampaignResponse } from "@/types/campaign-response";
-import { useContract } from "@thirdweb-dev/react";
+import { useWeb3Context } from "context/web3Context";
 import { useQuery, UseQueryOptions } from "react-query";
 import { parseCampaign } from "utils/utility";
 
@@ -10,10 +10,10 @@ export const useCampaigns = (
     "queryKey" | "queryFn"
   >
 ) => {
-  const { contract } = useContract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
+  const { contract } = useWeb3Context();
 
   const fetchCampaigns = async () => {
-    const campaigns: CampaignResponse[] = await contract!.call('getProjects');
+    const campaigns: CampaignResponse[] = await contract!.call('getCampaigns');
 
     if (campaigns) {
       const parsedCampaigns: Campaign[] = campaigns.map((campaign, i: number) => parseCampaign(campaign, i));
