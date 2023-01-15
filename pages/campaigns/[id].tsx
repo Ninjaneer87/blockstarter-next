@@ -33,7 +33,7 @@ const CampaignDetails: NextPage = () => {
             {campaign.amountProgress === 100
               ? <Alert severity="success" variant="standard" className="my-6">
                   <AlertTitle>Success</AlertTitle>
-                  This campaign has reached the target amount, and it will be accepting donation indefinitelly.
+                  This campaign has reached the target amount, and it will be accepting donations indefinitelly.
                 </Alert>
               : null}
 
