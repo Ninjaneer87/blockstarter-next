@@ -1,5 +1,7 @@
 ## BlockStarter
 
+Smart contract repo: [https://github.com/Ninjaneer87/blockstarter-web3](https://github.com/Ninjaneer87/blockstarter-web3)
+
 Technologies used:
 
  - Client:  `Next JS(^13)` | `TypeScript` | `Tailwind-CSS` | `Material UI(^5)` | `SCSS` | `thirdweb` | `React Query`
