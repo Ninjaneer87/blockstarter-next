@@ -12,7 +12,7 @@ export const useRefundableBalance = (
   const { contract, address } = useWeb3Context();
 
   const fetchRefundableBalance = async () => {
-    const balance: number = await contract!.call("getRefundableBalance", id);
+    const balance: number = await contract!.call("getRefundableBalance", address, id);
     const parsedBalance = ethers.utils.formatEther(balance);
     return parsedBalance;
   }

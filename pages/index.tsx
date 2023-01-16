@@ -1,11 +1,9 @@
 import type { NextPage } from "next";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import NextLink from "next/link";
 import { useCampaigns } from "hooks/web3/useCampaigns";
 import { useMemo } from "react";
 import { ButtonBase } from "@mui/material";
-import NextLink from "next/link";
-
-const shapeImg = '/img/shapes.svg'
 
 const Home: NextPage = () => {
   const { data } = useCampaigns();
@@ -25,13 +23,23 @@ const Home: NextPage = () => {
     data ?
       <>
         <div className="w-[800px] min-h-[600px] max-w-full relative mx-auto bg-[url('/img/shapes.svg')] bg-contain bg-no-repeat  mt-10 lg:mt-20 blur-in">
-          <div className='w-[500px] max-w-full mx-auto p-6 flex flex-col gap-6'>
+          <div className='w-[500px] max-w-full mx-auto py-6 flex flex-col gap-6'>
             <div>
               <div className="text-secondary uppercase text-sm">INTRODUCING</div>
               <h1 className='m-0 mt-2'>BlockStarter - Campaigns</h1>
             </div>
 
-            <div className="dark:opacity-90 font-light">
+            <div 
+              className="
+                font-normal relative backdrop-blur-3xl
+                after:content-[''] after:absolute after:z-[-1] after:bg-primary  after:opacity-70 
+                after:top-[-12px] after:bottom-[50%] after:left-[-12px] after:w-[80px]
+                after:rounded-r-full
+                before:content-[''] before:absolute before:z-[-1] before:bg-secondary before:opacity-70 
+                before:bottom-[-12px] before:top-[50%] before:left-[-12px] before:w-[80px]
+                before:rounded-r-full
+              "
+            >
               Blockstarter is a platform for decentralized crowdfunding, empowering anyone to bring their innovative projects to life through the support of the community.
             </div>
 

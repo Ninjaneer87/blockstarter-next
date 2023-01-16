@@ -16,7 +16,7 @@ const DonationStats = ({ daysLeft, amountRaised, target, isExpired, backersCount
   ];
 
   return (
-    <ul className='flex flex-wrap gap-8'>
+    <ul className='flex flex-wrap gap-8 items-start h-fit'>
       {statItems.map(({ id, value, label }) => (
         <li key={id} className='w-full text-center overflow-hidden rounded-2xl flex flex-col'>
           <div className='text-2xl font-bold p-4 bg-themed-bg-paper grow flex justify-center items-center'>

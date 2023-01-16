@@ -16,7 +16,7 @@ export const useCampaigns = (
     const campaigns: CampaignResponse[] = await contract!.call('getCampaigns');
 
     if (campaigns) {
-      const parsedCampaigns: Campaign[] = campaigns.map((campaign, i: number) => parseCampaign(campaign, i));
+      const parsedCampaigns: Campaign[] = campaigns.map((campaign, i: number) => parseCampaign(campaign, i)).reverse();
       return parsedCampaigns;
     }
     return [];

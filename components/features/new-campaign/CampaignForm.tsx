@@ -16,13 +16,21 @@ import { ethers } from 'ethers';
 import { useQueryClient } from 'react-query';
 import AlertSnack from '@/components/shared/snacks/AlertSnack';
 import { useWeb3Context } from 'context/web3Context';
+import { ValidSubmitEvent } from 'react-zorm/dist/use-zorm';
+import { useRouter } from 'next/router';
 
 const moneyImg = '../../img/money.svg';
 
-export type CampaignFieldName = "fullname" | "title" | "story" | "target" | "deadline" | "image";
+export type CampaignFieldName = "title" | "story" | "target" | "deadline" | "image";
+type CampaignFields = {
+  title: string;
+  story: string;
+  target: string;
+  deadline: string;
+  image: string;
+}
 
 const FormSchema = z.object({
-  fullname: z.string().min(1, { message: 'Your name is required' }),
   title: z.string().min(1, { message: 'Campaign title is required' }),
   story: z.string().min(1, { message: 'Story is required' }),
   target: z.string().refine(val => Number(val) > 0, { message: 'Target must be greater than 0' }),
@@ -31,44 +39,43 @@ const FormSchema = z.object({
 })
 
 const CampaignForm = () => {
-  const [successSnack, setSuccessSnack] = useState(false);
   const [errorSnack, setErrorSnack] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { address } = useWeb3Context();
   const queryClient = useQueryClient();
   const [date, setDate] = useState(dayjs().add(1, 'day'));
-  const { mutate: addCampaign, isLoading: isSubmitting } = useAddCampaign({
-    onSuccess: () => {
-      zorm.form?.reset();
-      setDate(dayjs().add(1, 'day'));
-      queryClient.invalidateQueries("wallet-balance");
-      setSuccessSnack(true)
-    },
-    onError: (error: any) => {
-      if (error.reason) {
-        if (error.reason === 'user rejected transaction') return;
-      }
-      setErrorMessage("Unable to create a campaign. Please check your balance and try again")
-      setErrorSnack(true);
+  const { mutate: addCampaign, isLoading: isSubmitting } = useAddCampaign({ onSuccess, onError });
+  const zorm = useZorm("campaign", FormSchema, { onValidSubmit });
+  const router = useRouter();
+
+  function onSuccess() {
+    queryClient.invalidateQueries("wallet-balance");
+    router.push('/profile');
+  }
+
+  function onError(error: any) {
+    if (error.reason) {
+      if (error.reason === 'user rejected transaction') return;
     }
-  });
-  const zorm = useZorm("campaign", FormSchema, {
-    async onValidSubmit(event) {
-      event.preventDefault();
-      const form = {
-        ...event.data,
-        target: ethers.utils.parseUnits(event.data.target, 18)
-      };
-      checkIfImage(form.image, (exists) => {
-        if(!exists) {
-          setErrorMessage("Unable to create a campaign. Please provide a valid image URL")
-          setErrorSnack(true);
-          return;
-        }
-        addCampaign(form);
-      })
-    },
-  });
+    setErrorMessage("Unable to create a campaign. Please check your balance and try again")
+    setErrorSnack(true);
+  }
+
+  async function onValidSubmit(event: ValidSubmitEvent<CampaignFields>) {
+    event.preventDefault();
+    const form = {
+      ...event.data,
+      target: ethers.utils.parseUnits(event.data.target, 18)
+    };
+    checkIfImage(form.image, (exists) => {
+      if(!exists) {
+        setErrorMessage("Unable to create a campaign. Please provide a valid image URL")
+        setErrorSnack(true);
+        return;
+      }
+      addCampaign(form);
+    })
+  }
 
   const handleDate = (newValue: Dayjs | null) => {
     if (newValue) setDate(newValue);
@@ -131,13 +138,7 @@ const CampaignForm = () => {
             : <ConnectButton className='w-[500px] max-w-full' />}
         </div>
       </form>
-
-      <AlertSnack
-        open={successSnack}
-        onClose={() => setSuccessSnack(false)}
-        message="Campaign has been created successfully!"
-        severity="success"
-      />
+      
       <AlertSnack
         open={errorSnack}
         onClose={() => setErrorSnack(false)}

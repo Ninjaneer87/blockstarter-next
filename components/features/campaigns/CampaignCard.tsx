@@ -5,13 +5,11 @@ import { daysLeft } from 'utils/utility';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import { Divider } from '@mui/material';
 import { useThemeContext } from 'context/themeContext';
-import { useWeb3Context } from 'context/web3Context';
 
 type Props = { campaign: Campaign };
 
 const CampaignCard = ({ campaign }: Props) => {
   const { dark } = useThemeContext();
-  const { balance } = useWeb3Context();
   const remainingDays = daysLeft(campaign.deadline);
 
   return (
@@ -30,7 +28,7 @@ const CampaignCard = ({ campaign }: Props) => {
           className="block w-full"
           title={campaign.title}
         >
-          <h2 className="flex items-center mt-2 truncate text-base bg-clip-text text-transparent gradient w-fit font-bold transition-colors justify-start py-4 m-0">
+          <h2 className="mt-2 truncate text-base bg-clip-text text-transparent gradient font-bold transition-colors py-4 m-0 uppercase">
             {campaign.title}
           </h2>
         </Link>

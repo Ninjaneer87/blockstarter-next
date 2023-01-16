@@ -40,7 +40,8 @@ const SideNav = () => {
 
   return (
     <ClientOnlyPortal>
-        <nav
+      {mounted || !isSmallScreen
+        ? <nav
             className={`
               flex flex-col gap-7 justify-between blur-in p-5 rounded-2xl max-lg:shadow-themed-shadow overflow-auto
               fixed top-[100px] max-sm:left-3 left-6 max-sm:right-3 max-lg:right-6 bg-glass max-sm:bottom-3 bottom-6 z-30
@@ -115,7 +116,7 @@ const SideNav = () => {
               </li>
             </ul>
           </nav>
-
+        : null}
     </ClientOnlyPortal>
   );
 };

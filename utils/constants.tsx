@@ -41,13 +41,6 @@ export const navItems = [
 type CampaignFormItem = Omit<FormFieldProps<CampaignFieldName>, "error">;
 export const campaignFormItems: CampaignFormItem[] = [
   {
-    name: 'fullname',
-    label: 'Your name *',
-    type: 'text',
-    placeholder: 'John Doe',
-    icon: <BadgeIcon color='primary' />,
-  },
-  {
     name: 'title',
     label: 'Campaign title *',
     type: 'text',
@@ -55,18 +48,18 @@ export const campaignFormItems: CampaignFormItem[] = [
     icon: <FormatQuoteIcon color='primary' />,
   },
   {
-    name: 'story',
-    label: 'Story *',
-    placeholder: 'Write your story',
-    icon: <SubtitlesIcon color='primary' />,
-    multiline: true,
-  },
-  {
     name: 'target',
     label: 'Target amount *',
     placeholder: 'GOR 0.5',
     type: 'number',
     icon: <SavingsIcon color='primary' />,
+  },
+  {
+    name: 'story',
+    label: 'Story *',
+    placeholder: 'Write your story',
+    icon: <SubtitlesIcon color='primary' />,
+    multiline: true,
   },
   {
     name: 'deadline',

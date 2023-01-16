@@ -18,7 +18,7 @@ const Manual: NextPage = () => {
     <>
       <h1 className='heading blur-in' >BlockStarter Manual</h1>
 
-      <Container maxWidth='md' className='leading-7 text-sm font-light blur-in'>
+      <Container maxWidth='md' className='leading-7 text-sm font-light blur-in px-0'>
         <h2>Step 1.</h2>
         <div>
           In order to make the most out of this application, make sure you have a browser wallet installed (Metamask recommended).
@@ -30,7 +30,7 @@ const Manual: NextPage = () => {
 
         <h2 className='mt-10'>Step 2.</h2>
         <div>
-          After successfull instalation, pick "GOERLI TESTNET" for the network in the wallet interface. While there, click to copy your address.
+          After successfull instalation, pick <strong>"GOERLI TESTNET"</strong> for the network in the wallet interface. While there, click to copy your address.
         </div>
 
         <h2 className='mt-10'>Step 3.</h2>

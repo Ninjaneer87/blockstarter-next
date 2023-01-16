@@ -21,7 +21,8 @@ const CampaignDetails: NextPage = () => {
     onSettled: (data) => {!data && setInvalidCampaign(true)}
   });
   const {data: refundableBalance} = useRefundableBalance(+id!, {
-    select: data => data === undefined ? "0" : data
+    select: data => data === undefined ? "0" : data,
+    enabled: !!campaign?.isExpired
   });
 
   return (
@@ -95,7 +96,7 @@ const CampaignDetails: NextPage = () => {
       {invalidCampaign
         ? <Alert severity="error" variant="outlined" className=" mt-12 w-fit mx-auto">
             <AlertTitle>This campaign does not exist</AlertTitle>
-            Seems like you're looking for something that doesn't exist... or does it!?
+            Seems like you're looking for something that doesn't exist... or does it...?
           </Alert>
         : null}
     </>
