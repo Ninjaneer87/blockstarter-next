@@ -1,35 +1,16 @@
-## Getting Started
+## BlockStarter
 
-Create a project using this example:
+Technologies used:
 
-```bash
-npx thirdweb create --template next-typescript-starter
-```
+ - Client:  `Next JS(^13)` | `TypeScript` | `Tailwind-CSS` | `Material UI(^5)` | `SCSS` | `thirdweb` | `React Query`.
+ - Blockchain: `Solidity` | `thirdweb` | `MetaMask`
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Short story behind BlockStarter
 
-On `pages/_app.tsx`, you'll find our `ThirdwebProvider` wrapping your app, this is necessary for our [hooks](https://portal.thirdweb.com/react) and
-[UI Components](https://portal.thirdweb.com/ui-components) to work.
+BlockStarter is one of my pet projects. It took ~ 10 days to complete all the basic functionalities..
 
-### Deploy to IPFS
+This is not a commercial application, and with that in mind, I would like to point out that it is not built to be infinitelly scalable.
 
-Deploy a copy of your application to IPFS using the following command:
+It is a frontend heavy project, attached to a [simple smart contract](https://github.com/Ninjaneer87/blockstarter-web3) placed on the GOERLI TESTNET.
 
-```bash
-yarn deploy
-```
-
-## Learn More
-
-To learn more about thirdweb and Next.js, take a look at the following resources:
-
-- [thirdweb React Documentation](https://docs.thirdweb.com/react) - learn about our React SDK.
-- [thirdweb TypeScript Documentation](https://docs.thirdweb.com/typescript) - learn about our JavaScript/TypeScript SDK.
-- [thirdweb Portal](https://docs.thirdweb.com) - check our guides and development resources.
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-
-You can check out [the thirdweb GitHub organization](https://github.com/thirdweb-dev) - your feedback and contributions are welcome!
-
-## Join our Discord!
-
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+I got the idea from a youtube video, so I made it a challenge to beat the teacher and make it with a next level UI, UX and a lot more functionalities.
