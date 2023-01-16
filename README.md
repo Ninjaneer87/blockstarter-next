@@ -3,7 +3,7 @@
 Technologies used:
 
  - Client:  `Next JS(^13)` | `TypeScript` | `Tailwind-CSS` | `Material UI(^5)` | `SCSS` | `thirdweb` | `React Query`
- - Blockchain: `Solidity` | `thirdweb` | `MetaMask`
+ - Web3: `Solidity` | `thirdweb` | `MetaMask`
 
 ## Hosting
 
