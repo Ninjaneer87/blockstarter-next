@@ -5,6 +5,10 @@ Technologies used:
  - Client:  `Next JS(^13)` | `TypeScript` | `Tailwind-CSS` | `Material UI(^5)` | `SCSS` | `thirdweb` | `React Query`
  - Blockchain: `Solidity` | `thirdweb` | `MetaMask`
 
+## Hosting
+
+BlockStarter is hosted on [Vercel](https://vercel.com/), at [https://blockstarter.vercel.app/](https://blockstarter.vercel.app/)
+
 ## Short story behind BlockStarter
 
 BlockStarter is one of my pet projects. It took ~ 10 days to complete all the basic functionalities..
