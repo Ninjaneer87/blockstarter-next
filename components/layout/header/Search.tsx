@@ -2,7 +2,7 @@ import { ButtonBase } from '@mui/material';
 import { useNavContext } from 'context/navContext';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormEventHandler } from 'react';
 
 const search = '/img/search.svg';
@@ -11,6 +11,7 @@ const Search = () => {
   const { setExpanded } = useNavContext();
   const { asPath ,pathname, push, query } = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -28,6 +29,8 @@ const Search = () => {
       pathname: '/campaigns',
       query: newQuery,
     });
+
+    if(inputRef.current) inputRef.current.blur();
   }
 
   useEffect(() => {
@@ -41,6 +44,7 @@ const Search = () => {
       className="flex w-full py-2 pl-4 pr-2 h-[51px] bg-glass rounded-full mx-auto shrink-0"
     >
       <input
+        ref={inputRef}
         type="text"
         placeholder="Find campaigns"
         className="w-full text-sm placeholder:text-placeholder bg-transparent outline-none border-none text-themed-text"
