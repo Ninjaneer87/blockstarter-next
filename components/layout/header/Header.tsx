@@ -17,7 +17,7 @@ const Header = () => {
         <Logo withLabel />
 
         <div className="ml-auto"></div>
-        <div className="hidden lg:flex flex-1 max-w-[450px] ">
+        <div className="flex flex-1 max-w-[450px] ">
           <Search />
         </div>
         {isSmallScreen 

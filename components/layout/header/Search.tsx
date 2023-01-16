@@ -38,11 +38,11 @@ const Search = () => {
   return (
     <form
       onSubmit={handleSearch}
-      className="flex w-full max-lg:shadow-themed-shadow py-2 pl-4 pr-2 h-[51px] bg-glass rounded-full mx-auto shrink-0"
+      className="flex w-full py-2 pl-4 pr-2 h-[51px] bg-glass rounded-full mx-auto shrink-0"
     >
       <input
         type="text"
-        placeholder="Search for campaigns"
+        placeholder="Find campaigns"
         className="w-full text-sm placeholder:text-placeholder bg-transparent outline-none border-none text-themed-text"
         spellCheck={false}
         onChange={e => setSearchQuery(e.target.value)}

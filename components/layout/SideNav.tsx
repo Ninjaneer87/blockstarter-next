@@ -48,9 +48,6 @@ const SideNav = () => {
               ${isCollapsed ? 'blur-out' : ''}
             `}
           >
-            {isSmallScreen 
-              ? <Search /> 
-              : null}
             <ul className='flex flex-col gap-3 lg:gap-7'>
               {navItems.map(item => (
                 <li key={item.path} className='flex flex-col lg:items-center gap-1 max-lg:w-full'>
