@@ -1,35 +1,22 @@
-## Getting Started
+## BlockStarter
 
-Create a project using this example:
+Smart contract repo: [https://github.com/Ninjaneer87/blockstarter-web3](https://github.com/Ninjaneer87/blockstarter-web3)
 
-```bash
-npx thirdweb create --template next-typescript-starter
-```
+Technologies used:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+ - Client:  `Next JS(^13)` | `TypeScript` | `Tailwind-CSS` | `Material UI(^5)` | `SCSS` | `thirdweb` | `React Query`
+ - Web3: `Solidity` | `thirdweb` | `MetaMask`
 
-On `pages/_app.tsx`, you'll find our `ThirdwebProvider` wrapping your app, this is necessary for our [hooks](https://portal.thirdweb.com/react) and
-[UI Components](https://portal.thirdweb.com/ui-components) to work.
+## Hosting
 
-### Deploy to IPFS
+BlockStarter is hosted on [Vercel](https://vercel.com/), at [https://blockstarter.vercel.app/](https://blockstarter.vercel.app/)
 
-Deploy a copy of your application to IPFS using the following command:
+## Short story behind BlockStarter
 
-```bash
-yarn deploy
-```
+BlockStarter is one of my pet projects. It took ~ 10 days to complete all the basic functionalities..
 
-## Learn More
+This is not a commercial application, and with that in mind, I would like to point out that it is not built to be infinitelly scalable.
 
-To learn more about thirdweb and Next.js, take a look at the following resources:
+It is a frontend heavy project, attached to a [simple smart contract](https://github.com/Ninjaneer87/blockstarter-web3) placed on the GOERLI TESTNET.
 
-- [thirdweb React Documentation](https://docs.thirdweb.com/react) - learn about our React SDK.
-- [thirdweb TypeScript Documentation](https://docs.thirdweb.com/typescript) - learn about our JavaScript/TypeScript SDK.
-- [thirdweb Portal](https://docs.thirdweb.com) - check our guides and development resources.
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-
-You can check out [the thirdweb GitHub organization](https://github.com/thirdweb-dev) - your feedback and contributions are welcome!
-
-## Join our Discord!
-
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+I got the idea from a youtube video, so I made it a challenge to beat the teacher and make it with a next level UI, UX and a lot more functionalities.
