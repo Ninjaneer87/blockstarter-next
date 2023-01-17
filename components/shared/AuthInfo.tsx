@@ -24,7 +24,7 @@ const AuthInfo = () => {
     <div className='flex items-center gap-6 lg:gap-4 wrap max-lg:flex-col'>
       {balance && network && address
         ? <>
-          <Tooltip title='Get me some GOR' arrow>
+          <Tooltip title='Get me some GOR ↗' arrow>
             <Button
               href="https://goerlifaucet.com/"
               target='_blank'
