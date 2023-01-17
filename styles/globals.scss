@@ -30,6 +30,12 @@
   .gradient-button {
     @apply gradient border-none outline-none flex gap-2 items-center justify-center py-3 px-4 rounded-xl text-base text-white;
   }
+  .gradient-error {
+    @apply bg-gradient-to-r from-transparent via-red-500 to-transparent;
+  }
+  .gradient-error-button {
+    @apply gradient-error border-none outline-none flex gap-2 items-center justify-center py-3 px-4 rounded-xl text-base text-white;
+  }
   .wallet-card {
     @apply flex justify-between items-center border-[1px] border-themed-border border-solid rounded-md p-3 text-base;
   }

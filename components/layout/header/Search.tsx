@@ -46,8 +46,8 @@ const Search = () => {
       <input
         ref={inputRef}
         type="text"
-        placeholder="Find campaigns"
-        className="w-full text-sm placeholder:text-placeholder bg-transparent outline-none border-none text-themed-text"
+        placeholder="Keyword, starter address..."
+        className="w-full text-sm placeholder:text-placeholder placeholder:text-xs bg-transparent outline-none border-none text-themed-text truncate"
         spellCheck={false}
         onChange={e => setSearchQuery(e.target.value)}
         value={searchQuery}

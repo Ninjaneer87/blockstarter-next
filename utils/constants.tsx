@@ -3,12 +3,12 @@ import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
 import { FormFieldProps } from '@/components/shared/FormField';
 import SubtitlesIcon from '@mui/icons-material/Subtitles';
-import BadgeIcon from '@mui/icons-material/Badge';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import EventIcon from '@mui/icons-material/Event';
 import PhotoIcon from '@mui/icons-material/Photo';
 import SavingsIcon from '@mui/icons-material/Savings';
 import WidgetsIcon from '@mui/icons-material/Widgets';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { CampaignFieldName } from '@/components/features/new-campaign/CampaignForm';
 
 export const navItems = [
@@ -22,6 +22,12 @@ export const navItems = [
     label: 'profile',
     icon: <SettingsAccessibilityIcon fontSize="large" />,
     path: '/profile',
+    exact: false,
+  },
+  {
+    label: 'donated',
+    icon: <VolunteerActivismIcon fontSize="large" />,
+    path: '/donated',
     exact: false,
   },
   {

@@ -32,14 +32,14 @@ const CampaignDetails: NextPage = () => {
             <h1 className='heading blur-in' >{campaign.title}</h1>
 
             {campaign.amountProgress === 100
-              ? <Alert severity="success" variant="standard" className="my-6">
+              ? <Alert severity="success" variant="standard" className="my-6 blur-in">
                   <AlertTitle>Success</AlertTitle>
                   This campaign has reached the target amount, and it will be accepting donations indefinitelly.
                 </Alert>
               : null}
 
             {campaign.isExpired
-              ? <Alert severity="error" variant="standard" className="my-6">
+              ? <Alert severity="error" variant="standard" className="my-6 blur-in">
                   <AlertTitle>Campaign failed</AlertTitle>
                   This campaign has failed to reach the target amount, and it is not accepting donations any more.
                 </Alert>
@@ -94,7 +94,7 @@ const CampaignDetails: NextPage = () => {
         : null}
 
       {invalidCampaign
-        ? <Alert severity="error" variant="outlined" className=" mt-12 w-fit mx-auto">
+        ? <Alert severity="error" variant="outlined" className=" mt-12 w-fit mx-auto blur-in">
             <AlertTitle>This campaign does not exist</AlertTitle>
             Seems like you're looking for something that doesn't exist... or does it...?
           </Alert>

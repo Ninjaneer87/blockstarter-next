@@ -31,7 +31,7 @@ const DrawerMobile = () => {
   return (
     <ClientOnlyPortal>
       <nav className={`gradient-wrapper fixed left-3 bottom-3 right-3 min-h-16 ${hide ? 'blur-out' : 'blur-in'} transition-transform overflow-hidden w-auto`}>
-        <ul className="bg-glass flex gap-3 p-3 rounded-2xl justify-evenly">
+        <ul className="bg-glass flex gap-2 p-3 rounded-2xl justify-evenly">
           {navItems.map(item => (
             <li key={item.path} className='flex flex-col items-center'>
               <ButtonBase

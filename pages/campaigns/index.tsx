@@ -14,7 +14,16 @@ const Campaigns: NextPage = () => {
   function select(data: Campaign[]) {
     let filtered = [] as Campaign[];
     if (search) {
-      filtered = data.filter(campaign => campaign.title.toLowerCase().includes((search as string).toLowerCase()));
+      filtered = data.filter(campaign => {
+        return campaign.title
+          .toLowerCase()
+          .includes((search as string)
+          .toLowerCase())
+        || campaign.owner
+          .toLowerCase()
+          .includes((search as string)
+          .toLowerCase())
+      });
       return filtered;
     }
     return data;
@@ -29,7 +38,7 @@ const Campaigns: NextPage = () => {
         : null}
 
       {data && !data.length && !search
-        ? <NoCampaignsYet title='Looks like there are no campaigns yet.' buttonText='Create the first campaign' />
+        ? <NoCampaignsYet href="/create" title='Looks like there are no campaigns yet.' buttonText='Create the first campaign' />
         : null}
     </>
   );

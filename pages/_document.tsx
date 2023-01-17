@@ -11,17 +11,16 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           {/* <meta name="theme-color" content={theme.palette.primary.main} /> */}
-          {/* <meta name="description" content="Frontend development playground" /> */}
           <meta name="author" content="AndrejGround" />
 
           <meta property="og:title" content="BlockStarter" />
           <meta
             property="og:description"
-            content="Frontend development playground"
+            content="Decentralized crowdfunding platform"
           />
           <meta property="og:type" content="website" />
-          {/* <meta property="og:url" content="https://andrejground.com/" /> */}
-          {/* <meta property="og:image" content="/meta-img.png" /> */}
+          <meta property="og:url" content="https://blockstarter.vercel.app/" />
+          <meta property="og:image" content="/meta-img.png" />
 
           <meta name="dc.coverage" content="BlockStarter" />
           <meta

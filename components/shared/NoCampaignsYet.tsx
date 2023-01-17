@@ -7,14 +7,16 @@ import { Container } from '@mui/material';
 type Props = {
   title: string;
   buttonText: string;
+  href: string;
 }
-const NoCampaignsYet = ({ title, buttonText }: Props) => {
+const NoCampaignsYet = ({ title, buttonText, href }: Props) => {
   return (
     <Container maxWidth='xs' className="blur-in text-xl px-0 text-center">
       {title}
-      <ButtonBase focusRipple
+      <ButtonBase 
+        focusRipple
         className='gradient-button mt-8'
-        href="/create"
+        href={href}
         LinkComponent={NextLink}
       >
         {buttonText} <ArrowRightAltIcon />

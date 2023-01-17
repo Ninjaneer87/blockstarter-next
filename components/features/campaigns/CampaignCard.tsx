@@ -1,37 +1,39 @@
 import { Campaign } from '@/types/campaign';
-import Link from 'next/link';
+import NextLink from "next/link";
 import React from 'react';
 import { daysLeft } from 'utils/utility';
 import WidgetsIcon from '@mui/icons-material/Widgets';
-import { Divider } from '@mui/material';
+import { Divider, ButtonBase } from '@mui/material';
 import { useThemeContext } from 'context/themeContext';
 
-type Props = { campaign: Campaign };
+type Props = { 
+  campaign: Campaign;
+  address: string | undefined
+ };
 
-const CampaignCard = ({ campaign }: Props) => {
+const CampaignCard = ({ campaign, address }: Props) => {
   const { dark } = useThemeContext();
   const remainingDays = daysLeft(campaign.deadline);
 
   return (
-    <div className={`${dark ? 'gradient-wrapper' : ''} w-full`}>
+    <ButtonBase 
+      focusRipple
+      href={`/campaigns/${campaign.pId}`}
+      LinkComponent={NextLink}
+      className={`${dark ? 'gradient-wrapper' : ''} w-full`}
+    >
       <div className='rounded-2xl bg-themed-bg-paper p-4 inline-block w-full'>
-        <Link href={`/campaigns/${campaign.pId}`} >
-          <img
-            src={campaign.image}
-            alt="fund"
-            className="w-full h-[160px] object-cover rounded-2xl"
-          />
-        </Link>
-
-        <Link
-          href={`/campaigns/${campaign.pId}`}
-          className="block w-full"
-          title={campaign.title}
+        <img
+          src={campaign.image}
+          alt="fund"
+          className="w-full h-[160px] object-cover rounded-2xl"
+        />
+        <h2 
+          title={campaign.title} 
+          className="mt-2 truncate text-base bg-clip-text text-transparent gradient font-bold transition-colors py-4 m-0 uppercase"
         >
-          <h2 className="mt-2 truncate text-base bg-clip-text text-transparent gradient font-bold transition-colors py-4 m-0 uppercase">
-            {campaign.title}
-          </h2>
-        </Link>
+          {campaign.title}
+        </h2>
         <Divider className='mb-6 bg-themed-border dark:opacity-30 opacity-20' />
 
         <p className="truncate text-xs font-normal dark:opacity-80">{campaign.description}</p>
@@ -54,7 +56,12 @@ const CampaignCard = ({ campaign }: Props) => {
           </div>
 
           <div className='text-right'>
-            <p className={`${campaign.isExpired ? 'text-red-400' : ''} ${campaign.amountProgress === 100 ? 'text-primary' : ''}`}>
+            <p 
+              className={`
+                ${campaign.isExpired ? 'text-red-400' : ''} 
+                ${remainingDays === "Last day" && campaign.amountProgress !== 100 ? 'text-orange-400' : ''}
+                ${campaign.amountProgress === 100 ? 'text-primary' : ''}
+              `}>
               {campaign.amountProgress === 100 ? 'Target reached' : remainingDays}
             </p>
             <p className='dark:opacity-60'>
@@ -69,11 +76,15 @@ const CampaignCard = ({ campaign }: Props) => {
           </span>
           <div className='truncate'>
             <span className='dark:opacity-70'>by </span>
-            <span>{campaign.owner}</span>
+            <span>
+              {campaign.owner === address 
+                ? <span className='inline-flex items-center ml-1 bg-themed-bg rounded-xl p-1 px-2 text-secondary font-bold'>Me</span> 
+                : campaign.owner}
+            </span>
           </div>
         </div>
       </div>
-    </div>
+    </ButtonBase>
   );
 };
 

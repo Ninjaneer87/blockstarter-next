@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '@mui/material';
+import { Button, Tooltip } from '@mui/material';
 import SensorsIcon from '@mui/icons-material/Sensors';
 import { formatAddress } from 'utils/utility';
 import ConnectButton from '@/components/shared/ConnectButton';
@@ -24,22 +24,27 @@ const AuthInfo = () => {
     <div className='flex items-center gap-6 lg:gap-4 wrap max-lg:flex-col'>
       {balance && network && address
         ? <>
-          <Button
-            color='primary'
-            className='icon-wrapper bg-glass px-4 blur-in max-lg:shadow-themed-shadow max-lg:w-full'
-            startIcon={<SensorsIcon />}
-          >
-            {network.name} <span>&nbsp;- {Number(balance.displayValue).toFixed(4)} {balance.symbol}</span>
-          </Button>
+          <Tooltip title='Get me some GOR' arrow>
+            <Button
+              href="https://goerlifaucet.com/"
+              target='_blank'
+              LinkComponent='a'
+              color='primary'
+              className='icon-wrapper bg-glass px-4 blur-in max-lg:shadow-themed-shadow max-lg:w-full'
+            >
+              <SensorsIcon fontSize='small' className='mr-2' /> {network.name} <span>&nbsp;- {Number(balance.displayValue).toFixed(4)} {balance.symbol}</span>
+            </Button>
+          </Tooltip>
 
-          <Button
-            color='secondary'
-            className='icon-wrapper bg-glass px-4 blur-in max-lg:shadow-themed-shadow max-lg:w-full min-w-[180px]'
-            startIcon={<ContentCopyIcon />}
-            onClick={copyHandler}
-          >
-            {copied ? 'Copied!' : formatAddress(address)}
-          </Button>
+          <Tooltip title={copied ? 'Copied' : 'Copy address'} arrow >
+            <Button
+              color='secondary'
+              className='icon-wrapper bg-glass px-4 blur-in max-lg:shadow-themed-shadow max-lg:w-full min-w-[180px]'
+              onClick={copyHandler}
+            >
+              <ContentCopyIcon fontSize='small' className='mr-2' />{copied ? 'Copied!' : formatAddress(address)}
+            </Button>
+          </Tooltip>
         </>
         : <ConnectButton />
       }
