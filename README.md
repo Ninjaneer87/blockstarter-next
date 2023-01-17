@@ -5,7 +5,7 @@ Smart contract repo: [https://github.com/Ninjaneer87/blockstarter-web3](https://
 Technologies used:
 
  - Client:  `Next JS(^13)` | `TypeScript` | `Tailwind-CSS` | `Material UI(^5)` | `SCSS` | `thirdweb` | `React Query`
- - Web3: `Solidity` | `thirdweb` | `MetaMask`
+ - Web3: `Solidity` | `thirdweb`
 
 ## Hosting
 
@@ -13,9 +13,9 @@ BlockStarter is hosted on [Vercel](https://vercel.com/), at [https://blockstarte
 
 ## Short story behind BlockStarter
 
-BlockStarter is one of my pet projects. It took ~ 10 days to complete all the basic functionalities..
+BlockStarter is one of my pet projects. It took me ~ 10 days to complete all the basic functionalities..
 
-This is not a commercial application, and with that in mind, I would like to point out that it is not built to be infinitelly scalable.
+This is not a commercial application, and with that in mind, I would like to point out that it was not built to be infinitelly scalable.
 
 It is a frontend heavy project, attached to a [simple smart contract](https://github.com/Ninjaneer87/blockstarter-web3) placed on the GOERLI TESTNET.
 
