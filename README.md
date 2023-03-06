@@ -19,4 +19,4 @@ This is not a commercial application, and with that in mind, I would like to poi
 
 It is a frontend heavy project, attached to a [simple smart contract](https://github.com/Ninjaneer87/blockstarter-web3) placed on the GOERLI TESTNET.
 
-I got the idea from a youtube video, so I made it a challenge to beat the teacher and make it with a next level UI, UX and a lot more functionalities.
+I got the idea from a youtube video, so I made it a challenge to beat the teacher and make it with improved UI, UX and a lot more functionalities.
