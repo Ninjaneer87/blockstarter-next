@@ -35,8 +35,9 @@ export default class MyDocument extends Document {
 
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link  rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@100;200;300;400;500;600;700;800;900&display=swap" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@100;200;300;400;500;600;700;800;900&display=swap" />
 
+          <meta name="probely-verification" content="59bc3737-54d6-4282-abed-b54e90c93b6a" />
         </Head>
         <Script src="/noflash.js" strategy="beforeInteractive" />
         <body>
