@@ -1,5 +1,5 @@
 import WalletModal from '@/components/shared/WalletModal/WalletModal';
-import { ButtonBase, Container } from '@mui/material';
+import { Alert, AlertTitle, ButtonBase, Container } from '@mui/material';
 import { NextPage } from 'next';
 import React, { useState } from 'react';
 
@@ -37,6 +37,10 @@ const Manual: NextPage = () => {
         <div>
           Go to <a href='https://goerlifaucet.com/' className='text-secondary' target='_blank'>GOERLI FAUCET↗</a>, paste your address in the input field and send your self some testnet GOR (native token of the Goerli testnet).
         </div>
+        <Alert severity="warning" variant="standard" className="my-2 blur-in">
+          <AlertTitle>Update</AlertTitle>
+          As of July 2023, in order to be able to receive testnet GOR, <strong>Goerli faucet</strong> requires a minimum mainnet balance of 0.001 ETH on the wallet address being used.
+        </Alert>
 
         <h2 className='mt-10'>Step 4.</h2>
         <div>

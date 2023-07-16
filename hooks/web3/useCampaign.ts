@@ -24,9 +24,9 @@ export const useCampaign = (
     ["campaign", id],
     fetchCampaign,
     { 
-      enabled: !!contract && !isNaN(id),
+      enabled: options?.enabled !== undefined ? options?.enabled && !!contract : !!contract,
       initialData: () => {
-        const campaign = queryClient.getQueryData<Campaign[]>('campaigns')?.find(c => c.pId === +id);
+        const campaign = queryClient.getQueryData<Campaign[]>('campaigns')?.find(c => c.pId === id);
         return campaign;
       },
       ...options, 
