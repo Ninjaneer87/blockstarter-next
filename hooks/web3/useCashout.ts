@@ -13,7 +13,10 @@ export const useCashout = (
   const { contract } = useWeb3Context();
 
   const cashout = async ({ campaignId, amount }: CashoutParams) => {
-    await contract?.call("cashout", campaignId, ethers.utils.parseEther(amount));
+    await contract?.call("cashout", [
+      campaignId,
+      ethers.utils.parseEther(amount),
+    ]);
   };
 
   return useMutation(cashout, options);

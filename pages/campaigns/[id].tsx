@@ -15,47 +15,60 @@ import { daysLeft } from "utils/utility";
 
 const CampaignDetails: NextPage = () => {
   const { address } = useWeb3Context();
-  const { query: { id } } = useRouter();
+  const {
+    query: { id },
+  } = useRouter();
   const campaignId = Math.round(Math.abs(+id!));
-  const invalidCampaignIdFormat = isNaN(campaignId);
-  const [invalidCampaign, setInvalidCampaign] = useState(invalidCampaignIdFormat);
+  const [invalidCampaign, setInvalidCampaign] = useState(false);
   const { data: campaign, isLoading } = useCampaign(campaignId, {
     onSettled: (data) => {
-      if (!data?.title) setInvalidCampaign(true)
+      setInvalidCampaign(!data?.title);
     },
-    enabled: !invalidCampaign
   });
   const { data: refundableBalance } = useRefundableBalance(campaignId, {
-    select: data => data === undefined ? "0" : data,
-    enabled: !!campaign?.isExpired
+    select: (data) => (data === undefined ? "0" : data),
+    enabled: !!campaign?.isExpired,
   });
 
   if (invalidCampaign || isNaN(campaignId)) {
-    return <Alert severity="error" variant="outlined" className=" mt-12 w-fit mx-auto blur-in">
-      <AlertTitle>This campaign does not exist</AlertTitle>
-      Seems like you're looking for something that doesn't exist... or does it...?
-    </Alert>
+    return (
+      <Alert
+        severity="error"
+        variant="outlined"
+        className=" mt-12 w-fit mx-auto blur-in"
+      >
+        <AlertTitle>This campaign does not exist</AlertTitle>
+        Seems like you're looking for something that doesn't exist... or does
+        it...?
+      </Alert>
+    );
   }
 
   return (
     <>
-      {campaign && !isLoading
-        ? <Container maxWidth='lg' className="p-0 blur-in">
-          <h1 className='heading blur-in' >{campaign.title}</h1>
+      {campaign && !isLoading ? (
+        <Container maxWidth="lg" className="p-0 blur-in">
+          <h1 className="heading blur-in">{campaign.title}</h1>
 
-          {campaign.amountProgress === 100
-            ? <Alert severity="success" variant="standard" className="my-6 blur-in">
+          {campaign.amountProgress === 100 ? (
+            <Alert
+              severity="success"
+              variant="standard"
+              className="my-6 blur-in"
+            >
               <AlertTitle>Success</AlertTitle>
-              This campaign has reached the target amount, and it will be accepting donations indefinitelly.
+              This campaign has reached the target amount, and it will be
+              accepting donations indefinitelly.
             </Alert>
-            : null}
+          ) : null}
 
-          {campaign.isExpired
-            ? <Alert severity="error" variant="standard" className="my-6 blur-in">
+          {campaign.isExpired ? (
+            <Alert severity="error" variant="standard" className="my-6 blur-in">
               <AlertTitle>Campaign failed</AlertTitle>
-              This campaign has failed to reach the target amount, and it is not accepting donations any more.
+              This campaign has failed to reach the target amount, and it is not
+              accepting donations any more.
             </Alert>
-            : null}
+          ) : null}
 
           <div className="grid grid-cols-[1fr] md:grid-cols-[2fr,_1fr] gap-8">
             <ImageAndProgress
@@ -66,24 +79,36 @@ const CampaignDetails: NextPage = () => {
             />
 
             {/* Campaign is active  (hide it if the user is owner and target is reached)*/}
-            {!campaign.isExpired && !(campaign.owner === address && campaign.amountProgress === 100)
-              ? <Donate campaignId={campaign.pId} target={campaign.target} />
-              : null}
+            {!campaign.isExpired &&
+            !(campaign.owner === address && campaign.amountProgress === 100) ? (
+              <Donate campaignId={campaign.pId} target={campaign.target} />
+            ) : null}
 
             {/* Campaign expired, user not connected or has NO withdrawable balance */}
-            {campaign.isExpired && !address || (campaign.isExpired && address && !(+refundableBalance! > 0))
-              ? <Expired amount={+campaign.ownerBalance} />
-              : null}
+            {(campaign.isExpired && !address) ||
+            (campaign.isExpired && address && !(+refundableBalance! > 0)) ? (
+              <Expired amount={+campaign.ownerBalance} />
+            ) : null}
 
             {/* Campaign expired, user has withdrawable balance */}
-            {campaign.isExpired && address && +refundableBalance! > 0
-              ? <Withdraw type="refund" campaignId={campaign.pId} amount={refundableBalance!} />
-              : null}
+            {campaign.isExpired && address && +refundableBalance! > 0 ? (
+              <Withdraw
+                type="refund"
+                campaignId={campaign.pId}
+                amount={refundableBalance!}
+              />
+            ) : null}
 
             {/* Campaign SUCCESS and user is the campaign owner*/}
-            {campaign.amountProgress === 100 && address && campaign.owner === address
-              ? <Withdraw type="cashout" campaignId={campaign.pId} amount={campaign.ownerBalance} />
-              : null}
+            {campaign.amountProgress === 100 &&
+            address &&
+            campaign.owner === address ? (
+              <Withdraw
+                type="cashout"
+                campaignId={campaign.pId}
+                amount={campaign.ownerBalance}
+              />
+            ) : null}
           </div>
 
           <div className="grid grid-cols-[1fr] sm:grid-cols-[1fr,_1fr] md:grid-cols-[1fr,_3fr] mt-8 gap-8">
@@ -103,7 +128,7 @@ const CampaignDetails: NextPage = () => {
             />
           </div>
         </Container>
-        : null}
+      ) : null}
     </>
   );
 };

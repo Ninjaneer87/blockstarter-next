@@ -12,24 +12,31 @@ export const useCampaign = (
   >
 ) => {
   const { contract } = useWeb3Context();
-  const queryClient = useQueryClient(); 
+  const queryClient = useQueryClient();
 
   const fetchCampaign = async () => {
-    const campaign: CampaignResponse = await contract!.call("getCampaign", id);
+    const campaign: CampaignResponse = await contract!.call("getCampaign", [
+      id,
+    ]);
     const parsedCampaign = parseCampaign(campaign, id);
     return parsedCampaign;
-  }
+  };
 
   return useQuery<Campaign, unknown, Campaign, ["campaign", number]>(
     ["campaign", id],
     fetchCampaign,
-    { 
-      enabled: options?.enabled !== undefined ? options?.enabled && !!contract : !!contract,
+    {
+      ...options,
+      enabled:
+        options?.enabled !== undefined
+          ? options?.enabled && !!contract && !isNaN(id)
+          : !!contract && !isNaN(id),
       initialData: () => {
-        const campaign = queryClient.getQueryData<Campaign[]>('campaigns')?.find(c => c.pId === id);
+        const campaign = queryClient
+          .getQueryData<Campaign[]>("campaigns")
+          ?.find((c) => c.pId === id);
         return campaign;
       },
-      ...options, 
     }
   );
 };

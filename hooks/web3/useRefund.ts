@@ -13,7 +13,10 @@ export const useRefund = (
   const { contract } = useWeb3Context();
 
   const refund = async ({ campaignId, amount }: RefundParams) => {
-    await contract?.call("refund", campaignId, ethers.utils.parseEther(amount));
+    await contract?.call("refund", [
+      campaignId,
+      ethers.utils.parseEther(amount),
+    ]);
   };
 
   return useMutation(refund, options);

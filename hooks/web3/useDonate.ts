@@ -13,7 +13,7 @@ export const useDonate = (
   const { contract } = useWeb3Context();
 
   const donate = async ({ id, amount }: DonationParams) => {
-    await contract?.call("donate", id, {
+    await contract?.call("donate", [id], {
       value: ethers.utils.parseEther(amount),
     });
   };

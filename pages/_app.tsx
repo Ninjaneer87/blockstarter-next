@@ -20,7 +20,7 @@ import { useMounted } from "hooks/useMounted";
 import ThemeContext from "context/themeContext";
 import { NavContextProvider } from "context/navContext";
 import Layout from "@/components/layout/Layout";
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useRouteLoading } from "hooks/useRouteLoading";
 import MyLoader from "@/components/shared/MyLoader";
@@ -39,7 +39,7 @@ type MyAppProps = AppProps & {
 
 const MyApp: React.FC<MyAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(() => new QueryClient());
   const [dark, toggleDarkMode] = useDarkMode(null);
   const [mounted] = useMounted();
   const theme = dark ? darkTheme : lightTheme;
@@ -49,7 +49,6 @@ const MyApp: React.FC<MyAppProps> = (props) => {
   }, [mounted]);
 
   return (
-
     <React.Fragment>
       <Head>
         <title>BlockStarter</title>
@@ -65,7 +64,7 @@ const MyApp: React.FC<MyAppProps> = (props) => {
               <CacheProvider value={emotionCache}>
                 <ThemeProvider theme={theme}>
                   <CssBaseline />
-                  <ThirdwebProvider desiredChainId={activeChainId}>
+                  <ThirdwebProvider activeChain="goerli" clientId={process.env.NEXT_PUBLIC_THIRDWEB_API_KEY}>
                     <Web3ContextProvider>
                       <MyLoader />
                       <Layout>
@@ -82,6 +81,6 @@ const MyApp: React.FC<MyAppProps> = (props) => {
       </QueryClientProvider>
     </React.Fragment>
   );
-}
+};
 
 export default MyApp;
